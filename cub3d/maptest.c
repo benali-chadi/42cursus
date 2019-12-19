@@ -49,12 +49,14 @@ void put_character(t_player player)
     }
 }
 
-void put_square(t_player player, int color)
+void put_square(t_player player, int color, int zero)
 {
     int d;
     int d2;
     int or_x;
+    int or_y;
 
+    or_y = player.y_m;
     or_x = player.x_m;
     d2 = player.y_m + TILE_SIZE;
     d = player.x_m + TILE_SIZE;
@@ -63,7 +65,10 @@ void put_square(t_player player, int color)
         player.x_m = or_x;
 		while (player.x_m < d)
 		{
-			mlx_pixel_put(mlx_ptr, win_ptr, player.x_m, player.y_m, color);
+            // if (!zero && (player.x_m == or_x || player.x_m == (d -1) || player.y_m == or_y || player.y_m == (d2 - 1)))
+			//     mlx_pixel_put(mlx_ptr, win_ptr, player.x_m, player.y_m, color);
+            // else if (zero)
+                mlx_pixel_put(mlx_ptr, win_ptr, player.x_m, player.y_m, color);
 			player.x_m++;
 		}
 		player.y_m++;
@@ -84,14 +89,16 @@ void draw_map(t_player *player)
         j = 0;
         while(j < MAP_X)
         {
+            // if (map[i][j] == 0)
+            //     put_square(*player, 0xffffff, 0);
             if(map[i][j] == 1)
-                put_square(*player, 0x0351C1);
+                put_square(*player, 0x0351C1, 1);
             else if (map[i][j] == 2)
-                put_square(*player, 0x00CF91);
+                put_square(*player, 0x00CF91, 1);
             else if (map[i][j] == 3)
-                put_square(*player, 0x7367F0);
+                put_square(*player, 0x7367F0, 1);
             else if (map[i][j] == 4)
-                put_square(*player, 0xB6BCF2);
+                put_square(*player, 0xB6BCF2, 1);
             else if (map[i][j] == 'N' && !count)
             {
                 player->x_p = player->x_m;
@@ -174,7 +181,8 @@ int main()
     init_pl_map(&player);
     draw_map(&player);
     put_character(player);
-    mlx_key_hook(win_ptr, move, &player);
+    mlx_hook(win_ptr, 2, 0, move, &player);
+    // mlx_key_hook(win_ptr, move, &player);
     // mlx_loop_hook(mlx_ptr, move, &player);
 	mlx_loop(mlx_ptr);
     return(0);
