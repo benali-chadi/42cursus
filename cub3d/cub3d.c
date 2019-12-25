@@ -1,6 +1,31 @@
 #include "cube3d.h"
 
-// INITIALIZATION // 
+int     map[MAP_Y][MAP_X] = {
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}, // 0
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 1
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 2
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 3
+    {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1}, // 4
+    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 5
+    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1}, // 6
+    {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 7
+    {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1}, // 8
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 9
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 10
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 11
+    {1,0,0,0,0,0,0,0,0,0,0,0,1,2,3,0,0,0,0,0,0,0,0,1}, // 12
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 13
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 14
+    // {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 15
+    {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 16
+    {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 17
+    {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 18
+    {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 19
+    {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1}, // 20
+    {1,4,4,4,4,4,4,4,4,0,0,'N',0,0,0,0,0,0,0,0,0,0,0,1}, // 21
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1} // 22
+};
 
 void init_pl_map(t_player *player)
 {
@@ -9,49 +34,6 @@ void init_pl_map(t_player *player)
     player->direction = 150;
     player->color = 0x48CFAF;
 }
-
-// void	put_pix(int x, int y, int color)
-// {
-// 	tab[x + y * WX] = color;
-// }
-
-// void init_img()
-// {
-//     int bpp;
-// 	int size_line;
-// 	int endian;
-//     // if (img_ptr)
-//     // {
-//     //     // mlx_destroy_image(mlx_ptr, img_ptr);
-//     //     free(img_ptr);
-//     //     free(img_data);
-//     // }
-// 	img_ptr = mlx_new_image(mlx_ptr, WX, WY);
-// 	img_data = mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
-// 	tab = (int *)img_data;
-// }
-
-
-// int has_wall(float y, float x)
-// {
-//     return (map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 0);
-// }
-
-// FOR CASTING //
-
-// float distance_between_points(float x1, float y1, float x2, float y2)
-// {
-//     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
-// }
-// float normalize_angle(float angle)
-// {
-//     angle = remainder(angle, TWO_PI);
-//     if (angle < 0)
-//     {
-//         angle = TWO_PI * angle;
-//     }
-//     return (angle);
-// }
 
 void cast_ray(float ray_angle, int stripid, t_player player)
 {
@@ -220,15 +202,15 @@ void draw_rays(t_player player)
         distance = rays[i].distance;
         player.x_p = or_x;
         player.y_p = or_y;
-        while (distance)
-        {
-            player.x_p = or_x + ( distance * sin(rays[i].ray_angle));
-            player.y_p = or_y + ( distance * cos(rays[i].ray_angle));
+        // while (distance)
+        // {
+            player.x_p = or_x + ( distance * sin(FOV_ANGLE));
+            player.y_p = or_y + ( distance * cos(FOV_ANGLE));
             put_pix(player.x_p, player.y_p, player.color);
             // rays[i].wall_hit_x--;
             // rays[i].wall_hit_y--;
-            distance--;
-        }
+        //     distance--;
+        // }
         // direction += 30 * VAL;
         i++;
     }
@@ -254,63 +236,24 @@ void put_character(t_player player)
 		put_pix(player.x_p, player.y_p, 0xffffff);
 		phi += 0.1;
 	}
-
-    // DRAW VIEW ANGLE
-
-    // phi = player.phi_start;
-    // while (r < 60)
-    // {
-    //     player.phi_start = phi; 
-    //     while (player.phi_start < player.phi_end)
-    //     {
-    //         player.x_p = or_x + (r * sin(player.phi_start * VAL));
-	//     	player.y_p = or_y + (r * cos(player.phi_start * VAL));
-    //         mlx_pixel_put(mlx_ptr, win_ptr, player.x_p, player.y_p, player.color);
-	//     	player.phi_start += 0.1;
-    //     }
-    //     r++;
-    // }
-    while (r < 60)
+     while (r < 60)
     {
         put_pix(player.x_p, player.y_p, 0xffffff);
         player.x_p = or_x + (r * sin((player.direction + 30) * VAL));
         player.y_p = or_y + (r * cos((player.direction + 30) * VAL));
         r++;
     }
-    // player.x_p = or_x;
-    // player.y_p = or_y;
-
-    // CASTING RAYS
-
-    // cast_all_rays(player);
-    // draw_rays(player);
+    player.x_p = or_x;
+    player.y_p = or_y;
 }
 
-// void put_square(t_player player, int color, int zero)
-// {
-//     int d;
-//     int d2;
-//     int or_x;
-//     int or_y;
+void cast_rays(t_player player)
+{
+    // CASTING RAYS
 
-//     or_y = player.y_m;
-//     or_x = player.x_m;
-//     d2 = player.y_m + TILE_SIZE;
-//     d = player.x_m + TILE_SIZE;
-// 	while (player.y_m < d2)
-// 	{
-//         player.x_m = or_x;
-// 		while (player.x_m < d)
-// 		{
-//             // if (!zero && (player.x_m == or_x || player.x_m == (d -1) || player.y_m == or_y || player.y_m == (d2 - 1)))
-// 			//     mlx_pixel_put(mlx_ptr, win_ptr, player.x_m, player.y_m, color);
-//             // else if (zero)
-//                 put_pix(player.x_m, player.y_m, color);
-// 			player.x_m++;
-// 		}
-// 		player.y_m++;
-// 	}
-// }
+    cast_all_rays(player);
+    draw_rays(player);
+}
 
 void draw_map(t_player *player)
 {
@@ -350,73 +293,6 @@ void draw_map(t_player *player)
     }
 }
 
-// TO MOVE //
-
-// int key_press(int key, t_player *player)
-// {
-//     if (key == 126 && !has_wall(player->y_p + INCREMENT_Y, player->x_p + INCREMENT_X))
-//         player->walk_direction = 1; 
-//     if (key == 125 && !has_wall(player->y_p - INCREMENT_Y, player->x_p - INCREMENT_X))
-//         player->walk_direction = -1;
-//     if (key == 124)
-//         player->turn_direction = -1;
-//     if (key == 123)
-//         player->turn_direction = 1;
-//     if (key == 53)
-//     {
-//         mlx_destroy_window(mlx_ptr, win_ptr);
-//         exit(0);
-//     }
-//     return (0);
-// }
-
-// int key_release(int key, t_player *player)
-// {
-//     if (key == 126 || key == 125)
-//         player->walk_direction = 0;
-//     if (key == 124 || key == 123)
-//         player->turn_direction = 0;
-//     return (0);
-// }
-
-// int move(int key, t_player *player)
-// {
-//     if (player->walk_direction == 1)
-//     {
-//         player->y_p += INCREMENT_Y;
-//         player->x_p += INCREMENT_X; 
-//     }  
-//     if (player->walk_direction == -1)
-//     {
-//         player->y_p -= INCREMENT_Y;
-//         player->x_p -= INCREMENT_X; 
-//     }
-//     if (player->turn_direction == -1)
-//     {
-//         // player->phi_start -= 10;
-//         // player->phi_end -= 10;
-//         player->direction -= 10;
-//     }
-//     if (player->turn_direction == 1)
-//     {
-//         // player->phi_start += 10;
-//         // player->phi_end += 10;
-//         player->direction += 10;
-//     }
-//     // else if (key == 53)
-//     // {
-//     //     mlx_destroy_window(mlx_ptr, win_ptr);
-//     //     exit(0);
-//     // }
-//     // mlx_clear_window(mlx_ptr, win_ptr);
-//     init_img();
-//     put_character(*player);
-//     draw_map(player);
-//     mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);
-//     // printf("x = %f, y = %f\n", player->x_p, player->y_p);
-//     return (0);
-// }
-
 int main()
 {
     t_player player;
@@ -432,10 +308,10 @@ int main()
     put_character(player);
     mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);
     // Move
-    mlx_hook(win_ptr, 2, 1L << 0, key_press, &player);
-    mlx_hook(win_ptr, 3, 1L << 1, key_release, &player);
-    // mlx_hook(win_ptr, 2, 0, move, &player);
-    // mlx_loop_hook(mlx_ptr, move, &player);
+    mlx_hook(win_ptr, 2, 1L<<0, key_press, &player);
+    mlx_hook(win_ptr, 3, 1L<<1, key_release, &player);
+    mlx_hook(win_ptr, 17, 0L, key_destroy, (void *)0);
+    mlx_loop_hook(mlx_ptr, move, &player);
 	mlx_loop(mlx_ptr);
     return(0);
 }
