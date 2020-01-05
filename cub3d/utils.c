@@ -2,7 +2,13 @@
 
 void	put_pix(int x, int y, int color)
 {
-	tab[x + y * WX] = color;
+    // int bpp;
+	// int size_line;
+	// int endian;
+    // img_ptr = mlx_new_image(mlx_ptr, WX, WY);
+    // img_data = (int *)mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
+    if (x >= 0 && x < WX && y >= 0 && y < WY)
+        img_data[x + (y * WX)] = color;
 }
 
 void init_img()
@@ -10,15 +16,17 @@ void init_img()
     int bpp;
 	int size_line;
 	int endian;
-    if (img_ptr)
-    {
-        // mlx_destroy_image(mlx_ptr, img_ptr);
-        free(img_ptr);
-        free(img_data);
-    }
-	img_ptr = mlx_new_image(mlx_ptr, WX, WY);
-	img_data = mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
-	tab = (int *)img_data;
+    // if (img_ptr)
+    // {
+        mlx_destroy_image(mlx_ptr, img_ptr);
+    mlx_clear_window(mlx_ptr, win_ptr);
+
+    //     free(img_ptr);
+    //     free(img_data);
+    // }
+    img_ptr = mlx_new_image(mlx_ptr, WX, WY);
+	img_data = (int *)mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
+	// tab = (int *)img_data;
 }
 
 void put_square(t_player player, int color, int zero)
@@ -49,7 +57,9 @@ void put_square(t_player player, int color, int zero)
 
 int has_wall(float y, float x)
 {
-    return (map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 0);
+    if (y > 0 && y < WY && x > 0 && x < WX)
+        return (map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 0 && map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 'N');
+    return (1);
 }
 
 // FOR CASTING //
@@ -61,9 +71,12 @@ float distance_between_points(float x1, float y1, float x2, float y2)
 float normalize_angle(float angle)
 {
     angle = remainder(angle, TWO_PI);
-    if (angle < 0)
-    {
-        angle = TWO_PI * angle;
-    }
+    angle += (angle < 0) ? TWO_PI : 0;
+    return (angle);
+}
+int normalize_angle_deg(int angle)
+{
+    angle = angle % 360;
+    angle += (angle < 0) ? 360 : 0;
     return (angle);
 }
