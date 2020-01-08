@@ -2,13 +2,8 @@
 
 void	put_pix(int x, int y, int color)
 {
-    // int bpp;
-	// int size_line;
-	// int endian;
-    // img_ptr = mlx_new_image(mlx_ptr, WX, WY);
-    // img_data = (int *)mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
-    if (x >= 0 && x < WX && y >= 0 && y < WY)
-        img_data[x + (y * WX)] = color;
+    if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
+        info.img_data[x + (y * info.win_width)] = color;
 }
 
 void init_img()
@@ -16,20 +11,14 @@ void init_img()
     int bpp;
 	int size_line;
 	int endian;
-    // if (img_ptr)
-    // {
-        mlx_destroy_image(mlx_ptr, img_ptr);
-    mlx_clear_window(mlx_ptr, win_ptr);
-
-    //     free(img_ptr);
-    //     free(img_data);
-    // }
-    img_ptr = mlx_new_image(mlx_ptr, WX, WY);
-	img_data = (int *)mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
-	// tab = (int *)img_data;
+    
+    // mlx_destroy_image(info.mlx_ptr, info.img_ptr);
+    // mlx_clear_window(info.mlx_ptr, info.win_ptr);
+    info.img_ptr = mlx_new_image(info.mlx_ptr, info.win_width, info.win_height);
+	info.img_data = (int *)mlx_get_data_addr(info.img_ptr, &bpp, &size_line, &endian);
 }
 
-void put_square(t_player player, int color, int zero)
+void put_square(t_player player, int color, int num)
 {
     int d;
     int d2;
@@ -38,17 +27,21 @@ void put_square(t_player player, int color, int zero)
 
     or_y = player.y_m;
     or_x = player.x_m;
-    d2 = player.y_m + TILE_SIZE;
-    d = player.x_m + TILE_SIZE;
+    d2 = player.y_m + info.tile_size_y;
+    d = player.x_m + info.tile_size_x;
 	while (player.y_m < d2)
 	{
         player.x_m = or_x;
 		while (player.x_m < d)
 		{
-            // if (!zero && (player.x_m == or_x || player.x_m == (d -1) || player.y_m == or_y || player.y_m == (d2 - 1)))
-			//     mlx_pixel_put(mlx_ptr, win_ptr, player.x_m, player.y_m, color);
-            // else if (zero)
-                put_pix(player.x_m, player.y_m, color);
+            if ((player.y_m == or_y || player.y_m == d2 - 1 || player.x_m == or_x || player.x_m == d - 1) && num == 1)
+                put_pix(MINI_MAP * player.x_m, MINI_MAP * player.y_m, color);
+            else if (num == 1)
+                put_pix(MINI_MAP * player.x_m, MINI_MAP * player.y_m, color);
+            else if ((player.y_m == or_y || player.y_m == d2 - 1 || player.x_m == or_x || player.x_m == d - 1) && num == 0)
+                put_pix(MINI_MAP * player.x_m, MINI_MAP * player.y_m, 0x0);
+            else if (num == 0)
+                put_pix(MINI_MAP * player.x_m, MINI_MAP * player.y_m, 0xffffff);
 			player.x_m++;
 		}
 		player.y_m++;
@@ -57,14 +50,14 @@ void put_square(t_player player, int color, int zero)
 
 int has_wall(float y, float x)
 {
-    if (y > 0 && y < WY && x > 0 && x < WX)
-        return (map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 0 && map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 'N');
+    if (y > 0 && y < info.win_height && x > 0 && x < info.win_width)
+        return (map[(int)y / info.tile_size_y][(int)x / info.tile_size_x] != 0 && map[(int)y / info.tile_size_y][(int)x / info.tile_size_x] != 'N');
     return (1);
 }
 
 // FOR CASTING //
 
-float distance_between_points(float x1, float y1, float x2, float y2)
+float dist_p(float x1, float y1, float x2, float y2)
 {
     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
