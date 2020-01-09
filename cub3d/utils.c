@@ -1,19 +1,13 @@
 #include "cube3d.h"
 
-void	put_pix(int x, int y, int color)
-{
-    if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
-        info.img_data[x + (y * info.win_width)] = color;
-}
-
 void init_img()
 {
     int bpp;
 	int size_line;
 	int endian;
     
-    // mlx_destroy_image(info.mlx_ptr, info.img_ptr);
-    // mlx_clear_window(info.mlx_ptr, info.win_ptr);
+    mlx_destroy_image(info.mlx_ptr, info.img_ptr);
+    mlx_clear_window(info.mlx_ptr, info.win_ptr);
     info.img_ptr = mlx_new_image(info.mlx_ptr, info.win_width, info.win_height);
 	info.img_data = (int *)mlx_get_data_addr(info.img_ptr, &bpp, &size_line, &endian);
 }
@@ -48,28 +42,45 @@ void put_square(t_player player, int color, int num)
 	}
 }
 
-int has_wall(float y, float x)
+int	num(int n)
 {
-    if (y > 0 && y < info.win_height && x > 0 && x < info.win_width)
-        return (map[(int)y / info.tile_size_y][(int)x / info.tile_size_x] != 0 && map[(int)y / info.tile_size_y][(int)x / info.tile_size_x] != 'N');
+	int i;
+
+	i = 0;
+	if (n <= 0)
+		i++;
+	while (n != 0)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+int     check_name(char *str)
+{
+    char **split;
+
+    split = ft_split(str, '.');
+    if (ft_strncmp(split[1], "cub", 20))
+        return (0);
+    if (split[2] != 0)
+        return (0);
     return (1);
 }
 
-// FOR CASTING //
-
-float dist_p(float x1, float y1, float x2, float y2)
+void    give_col(t_col fc, char c)
 {
-    return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
-}
-float normalize_angle(float angle)
-{
-    angle = remainder(angle, TWO_PI);
-    angle += (angle < 0) ? TWO_PI : 0;
-    return (angle);
-}
-int normalize_angle_deg(int angle)
-{
-    angle = angle % 360;
-    angle += (angle < 0) ? 360 : 0;
-    return (angle);
+    if (c == 'f')
+    {
+        info.flr_co = fc.r;
+        info.flr_co = (info.flr_co << 8) + fc.g;
+        info.flr_co = (info.flr_co << 8) + fc.b;
+    }
+    else if (c == 'c')
+    {
+        info.cel_co = fc.r;
+        info.cel_co = (info.cel_co << 8) + fc.g;
+        info.cel_co = (info.cel_co << 8) + fc.b;
+    }
 }

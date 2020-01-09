@@ -15,9 +15,9 @@
 # define INT_MAX 2147483647
 # define PI 3.14159265359
 # define TWO_PI 6.283118530
-# define VAL (float)(PI / 180)
+# define VAL (PI / 180)
 
-# define FOV_ANGLE (float)(60 * VAL)
+# define FOV_ANGLE (60 * VAL)
 # define MINI_MAP 0.2
 # define WALL_WIDTH 1
 
@@ -32,6 +32,9 @@
 # define INCREMENT_X_UD cos(player->direction * VAL) * 5
 
 
+/*
+**Player struct
+*/
 
 typedef struct s_player{
     float x_p;
@@ -43,6 +46,10 @@ typedef struct s_player{
     float turn_direction;
     float walk_direction;
 }               t_player;
+
+/*
+**Rays structs
+*/
 
 typedef struct  s_ray {
     float   ray_angle;
@@ -69,6 +76,10 @@ typedef struct  s_ray_hit {
 
 }               t_ray_hit;
 
+/*
+**Info struct
+*/
+
 typedef struct s_info
 {
     void    *mlx_ptr;
@@ -86,38 +97,70 @@ typedef struct s_info
     int     tile_size_y;
 }               t_info;
 
+/*
+**Floor and ceiling color struct
+*/
+
+typedef struct  s_col{
+    int r;
+    int g;
+    int b;
+}               t_col;
+
+/*
+**Global variables
+*/
+
 t_info  info;
 t_rays  rays[5120];
-
 int     map[1024][1024];
 
-void    read_file(int fd);
-int     check_name(char *str);
+/*
+**To move
+*/
 
 int     key_destroy(int key, void * ptr);
 int     key_press(int key, t_player *player);
 int     key_release(int key, t_player *player);
 int     move(t_player *player);
 
-int     has_wall(float y, float x);
+/*
+**Drawing
+*/
 
 void    init_img();
 void    put_pix(int x, int y, int color);
-
 void    put_character(t_player player);
 void    put_square(t_player player, int color, int num);
 void    draw_map(t_player *player);
 
-int     normalize_angle_deg(int angle);
+/*
+**File reading
+*/
 
-void   cast_all_rays(t_player player);
-// void    cats_ray(float ray_angle, int stripid, t_player player);
-// void    give_values(t_ray_hit inter, float ray_angle, int stripid, float distance);
-// void    vert_inter(t_ray_hit *vert, t_player player, int stripid, float ray_angle);
-// void    horz_inter(t_ray_hit *horz, t_player player, int stripid, float ray_angle);
+void    read_file(int fd);
+int     check_name(char *str);
+int     check_name(char *str);
+void    give_col(t_col fc, char c);
+int     init_map(char *line);
+void    flr(char *line, t_col *f);
+void    ceiling(char *line, t_col *c);
 
+/*
+**Casting and rendering
+*/
+
+void    cast_all_rays(t_player player);
 float   dist_p(float x1, float y1, float x2, float y2);
-float   normalize_angle(float angle);
-
 void    render_3d(float direction);
+
+/*
+**Tools
+*/
+
+int     has_wall(float y, float x);
+float   normalize_angle(float angle);
+int     normalize_angle_deg(int angle);
+int     num(int n);
+
 #endif

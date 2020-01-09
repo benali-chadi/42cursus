@@ -8,7 +8,7 @@ NAMELIB = libft.a
 
 NAME = CUBE3D.a
 
-SRC = cub3d.c move.c utils.c cast.c
+SRC = cub3d.c move.c utils.c cast.c read_file.c render_3d.c
 
 O = $(SRC:.c=.o)
 

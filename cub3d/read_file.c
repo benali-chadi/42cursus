@@ -1,28 +1,8 @@
 #include "cube3d.h"
 
-typedef struct  s_col{
-    int r;
-    int g;
-    int b;
-}               t_col;
-
 int     r[2];
 int     count_i;
 
-int	num(int n)
-{
-	int i;
-
-	i = 0;
-	if (n <= 0)
-		i++;
-	while (n != 0)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
-}
 
 void    resolution(char *line)
 {
@@ -37,30 +17,22 @@ void    resolution(char *line)
             line += num(r[j]);
             j++;
         }
-        if (j > 1)
-            break;
         line++;
     }
 }
 
-void    flr(char *line, t_col *f)
+
+
+void    init_info(t_col f, t_col c, int *r, int count_j)
 {
-    char **split;
-
-    split = ft_split(line, ',');
-    f->r = ft_atoi(split[0]);
-    f->g = ft_atoi(split[1]);
-    f->b = ft_atoi(split[2]);
-}
-
-void    ceiling(char *line, t_col *c)
-{
-    char **split;
-
-    split = ft_split(line, ',');
-    c->r = ft_atoi(split[0]);
-    c->g = ft_atoi(split[1]);
-    c->b = ft_atoi(split[2]);
+    info.map_x = count_j;
+    info.map_y = count_i;
+    info.win_width = r[0];
+    info.win_height = r[1];
+    give_col(f, 'f');
+    give_col(c, 'c');
+    info.tile_size_x = info.win_width / info.map_x;
+    info.tile_size_y = info.win_height / info.map_y;
 }
 
 int     init_map(char *line)
@@ -78,52 +50,13 @@ int     init_map(char *line)
         else if (ft_isalpha(*line))
         {
             map[count_i][j] = *line;
-            printf("%d\n", *line);
+            // printf("lien = %d map = %d\n", *line, map[count_i][j]);
+            j++;
         }
         line++;
     }
     count_i++;
     return (j);
-}
-
-int     check_name(char *str)
-{
-    char **split;
-
-    split = ft_split(str, '.');
-    if (ft_strncmp(split[1], "cub", 20))
-        return (0);
-    if (split[2] != 0)
-        return (0);
-    return (1);
-}
-
-void    give_col(t_col fc, char c)
-{
-    if (c == 'f')
-    {
-        info.flr_co = fc.r;
-        info.flr_co = (info.flr_co << 8) + fc.g;
-        info.flr_co = (info.flr_co << 8) + fc.b;
-    }
-    else if (c == 'c')
-    {
-        info.cel_co = fc.r;
-        info.cel_co = (info.cel_co << 8) + fc.g;
-        info.cel_co = (info.cel_co << 8) + fc.b;
-    }
-}
-
-void    init_info(t_col f, t_col c, int *r, int count_j)
-{
-    info.map_x = count_j;
-    info.map_y = count_i;
-    info.win_width = r[0];
-    info.win_height = r[1];
-    give_col(f, 'f');
-    give_col(c, 'c');
-    info.tile_size_x = info.win_width / info.map_x;
-    info.tile_size_y = info.win_height / info.map_y;
 }
 
 void    read_file(int fd)
@@ -158,7 +91,6 @@ void    read_file(int fd)
     if (ft_isdigit(line[0]))
         count_j = init_map(line);
     init_info(f, c, r, count_j);
-    
 }
 
 // int     main(int ac, char **av)

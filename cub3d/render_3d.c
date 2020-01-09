@@ -17,7 +17,45 @@ void draw_wall(int x, float wall_height)
         x = or_x;
         while (x < x_end)
         {
-            put_pix(x, y, 0xffffff);
+            put_pix(x, y, 0x14C878);
+            x++;
+        }
+        y++;
+    }
+}
+
+void    draw_flr()
+{
+    int y;
+    int x;
+
+    y = info.win_height / 2;
+    while (y < info.win_height)
+    {
+        x = 0;
+        while (x < info.win_width)
+        {
+            put_pix(x, y, info.flr_co);
+            x++;
+        }
+        y++;
+    }
+}
+
+void    draw_cel()
+{
+    int x;
+    int y;
+    int y_end;
+
+    y = 0;
+    y_end = info.win_height / 2;
+    while (y < y_end)
+    {
+        x = 0;
+        while (x < info.win_width)
+        {
+            put_pix(x, y, info.cel_co);
             x++;
         }
         y++;
@@ -31,6 +69,8 @@ void    render_3d(float direction)
     float wall_height;
     float distance;
 
+    draw_flr();
+    draw_cel();
     dist_proj = (info.win_width / 2) / tan(FOV_ANGLE / 2);
     i = 0;
     while (i < info.win_width)
