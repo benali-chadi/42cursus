@@ -81,6 +81,7 @@ int move(t_player *player)
     render_3d(player->direction);
     draw_map(player);
     put_character(*player);
+    draw_rays(*player);
     mlx_put_image_to_window(info.mlx_ptr, info.win_ptr, info.img_ptr, 0, 0);
     return (0);
 }

@@ -1,9 +1,18 @@
 #include "cube3d.h"
 
-void	put_pix(int x, int y, int color)
+int	num(int n)
 {
-    if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
-        info.img_data[x + (y * info.win_width)] = color;
+	int i;
+
+	i = 0;
+	if (n <= 0)
+		i++;
+	while (n != 0)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
 }
 
 int has_wall(float y, float x)

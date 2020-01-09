@@ -133,6 +133,7 @@ void    put_pix(int x, int y, int color);
 void    put_character(t_player player);
 void    put_square(t_player player, int color, int num);
 void    draw_map(t_player *player);
+void    draw_rays(t_player player);
 
 /*
 **File reading

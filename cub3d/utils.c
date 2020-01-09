@@ -12,6 +12,12 @@ void init_img()
 	info.img_data = (int *)mlx_get_data_addr(info.img_ptr, &bpp, &size_line, &endian);
 }
 
+void	put_pix(int x, int y, int color)
+{
+    if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
+        info.img_data[x + (y * info.win_width)] = color;
+}
+
 void put_square(t_player player, int color, int num)
 {
     int d;
@@ -40,21 +46,6 @@ void put_square(t_player player, int color, int num)
 		}
 		player.y_m++;
 	}
-}
-
-int	num(int n)
-{
-	int i;
-
-	i = 0;
-	if (n <= 0)
-		i++;
-	while (n != 0)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
 }
 
 int     check_name(char *str)
