@@ -21,8 +21,6 @@ void    resolution(char *line)
     }
 }
 
-
-
 void    init_info(t_col f, t_col c, int *r, int count_j)
 {
     info.map_x = count_j;
@@ -92,38 +90,3 @@ void    read_file(int fd)
         count_j = init_map(line);
     init_info(f, c, r, count_j);
 }
-
-// int     main(int ac, char **av)
-// {
-    
-//     int     fd;
-//     int     i;
-
-//     if (ac < 2)
-//     {
-//         perror("Error");
-//         exit(-1);
-//     }
-//     fd = open(av[1], O_RDONLY);
-//     if (!check_name(av[1]) || fd == -1)
-//     {
-//         perror("Error");
-//         exit(-1);
-//     }
-//     // int count_j = give_values(fd);
-//     // i = 0;
-//     // int j;
-//     // printf("rx : %d\try : %d\nfr : %d\tfg : %d\tfb : %d\ncr : %d\tcg : %d\tcb : %d\n", r[0], r[1], f.r, f.g, f.b, c.r, c.g, c.b);
-//     // printf("THE MAP :\n");
-//     // while (i < count_i)
-//     // {
-//     //     j = 0;
-//     //     while (j < count_j)
-//     //     {
-//     //         printf("map[%d][%d] : %d\n", i, j, map[i][j]);
-//     //         j++;
-//     //     }
-//     //     i++;
-//     // }
-//     return (0);
-// }

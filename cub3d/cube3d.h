@@ -1,16 +1,16 @@
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <math.h>
-#include "libft/libft.h"
+#include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <mlx.h>
+#include <math.h>
 #include <fcntl.h>
 #include <errno.h>
+#include "libft/libft.h"
 #include "gnl/get_next_line.h"
 
-#include <stdio.h>
 
 # define INT_MAX 2147483647
 # define PI 3.14159265359
@@ -20,13 +20,6 @@
 # define FOV_ANGLE (60 * VAL)
 # define MINI_MAP 0.2
 # define WALL_WIDTH 1
-
-// # define TILE_SIZE 40
-// # define MAP_X 24
-// # define MAP_Y 23
-
-// # define WX (MAP_X * TILE_SIZE)
-// # define WY (MAP_Y * TILE_SIZE)
 
 # define INCREMENT_Y_UD sin(player->direction * VAL) * 5
 # define INCREMENT_X_UD cos(player->direction * VAL) * 5
@@ -56,6 +49,7 @@ typedef struct  s_ray {
     float   wall_hit_x;
     float   wall_hit_y;
     float   distance;
+    int     is_vertical;
     int     is_ray_facing_up;
     int     is_ray_facing_down;
     int     is_ray_facing_left;
@@ -108,11 +102,28 @@ typedef struct  s_col{
 }               t_col;
 
 /*
+**Textures struct
+*/
+
+typedef struct  s_tex
+{
+    void    *ptr;
+    int     *tex;
+    int     img_width;
+    int     img_height;
+    int     bpp;
+    int     size_line;
+    int     endian;
+}               t_tex;
+
+
+/*
 **Global variables
 */
 
 t_info  info;
 t_rays  rays[5120];
+t_tex   tex[4];
 int     map[1024][1024];
 
 /*

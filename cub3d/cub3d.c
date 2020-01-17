@@ -20,53 +20,6 @@ void init_player(t_player *player, int i)
 
 // FOR CHARACTER //
 
-void    put_character(t_player player)
-{
-    float r;
-	float phi;
-    int or_x;
-    int or_y;
-
-    or_x = player.x_p;
-    or_y = player.y_p;
-	r = 2;
-	phi = 0;
-	while (phi <= 360)
-	{
-		player.x_p = or_x + (r * cos(phi * VAL));
-		player.y_p = or_y + (r * sin(phi * VAL));
-		put_pix(MINI_MAP * player.x_p, MINI_MAP * player.y_p, player.color);
-		phi += 0.1;
-	}
-   
-    while (r < 60)
-    {
-        put_pix(MINI_MAP * player.x_p, MINI_MAP * player.y_p, 0xff0000);
-        player.x_p = or_x + (r * cos(player.direction * VAL));
-        player.y_p = or_y + (r * sin(player.direction * VAL));
-        r++;
-    }
-    // player.x_p = or_x;
-    // player.y_p = or_y;
-    
-    // // Cast drawing
-
-    // int i = 0;
-    // while (i < info.win_width)
-    // {
-    //     r = 0;
-    //     while (r < rays[i].distance)
-    //     {
-    //         player.x_p = or_x + (r * cos(rays[i].ray_angle));
-    //         player.y_p = or_y + (r * sin(rays[i].ray_angle));
-    //         put_pix(MINI_MAP * player.x_p, MINI_MAP * player.y_p, player.color);
-    //         r++;
-    //     }
-    //     i++;
-    // }
-    // render_3d();
-}
-
 void draw_map(t_player *player)
 {
     int i;

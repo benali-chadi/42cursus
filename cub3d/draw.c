@@ -48,30 +48,55 @@ void put_square(t_player player, int color, int num)
 	}
 }
 
-int     check_name(char *str)
+void    draw_rays(t_player player)
 {
-    char **split;
+    int i;
+    int r;
+    int or_x;
+    int or_y;
 
-    split = ft_split(str, '.');
-    if (ft_strncmp(split[1], "cub", 20))
-        return (0);
-    if (split[2] != 0)
-        return (0);
-    return (1);
+    i = 0;
+    or_x = player.x_p;
+    or_y = player.y_p;
+    while (i < info.win_width)
+    {
+        r = 0;
+        while (r < rays[i].distance)
+        {
+            player.x_p = or_x + (r * cos(rays[i].ray_angle));
+            player.y_p = or_y + (r * sin(rays[i].ray_angle));
+            put_pix(MINI_MAP * player.x_p, MINI_MAP * player.y_p, player.color);
+            r++;
+        }
+        i++;
+    }
 }
 
-void    give_col(t_col fc, char c)
+
+void    put_character(t_player player)
 {
-    if (c == 'f')
+    float r;
+	float phi;
+    int or_x;
+    int or_y;
+
+    or_x = player.x_p;
+    or_y = player.y_p;
+	r = 2;
+	phi = 0;
+	while (phi <= 360)
+	{
+		player.x_p = or_x + (r * cos(phi * VAL));
+		player.y_p = or_y + (r * sin(phi * VAL));
+		put_pix(MINI_MAP * player.x_p, MINI_MAP * player.y_p, player.color);
+		phi += 0.1;
+	}
+   
+    while (r < 60)
     {
-        info.flr_co = fc.r;
-        info.flr_co = (info.flr_co << 8) + fc.g;
-        info.flr_co = (info.flr_co << 8) + fc.b;
-    }
-    else if (c == 'c')
-    {
-        info.cel_co = fc.r;
-        info.cel_co = (info.cel_co << 8) + fc.g;
-        info.cel_co = (info.cel_co << 8) + fc.b;
+        put_pix(MINI_MAP * player.x_p, MINI_MAP * player.y_p, 0xff0000);
+        player.x_p = or_x + (r * cos(player.direction * VAL));
+        player.y_p = or_y + (r * sin(player.direction * VAL));
+        r++;
     }
 }

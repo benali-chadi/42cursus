@@ -20,26 +20,30 @@ void    ceiling(char *line, t_col *c)
     c->b = ft_atoi(split[2]);
 }
 
-void    draw_rays(t_player player)
+int     check_name(char *str)
 {
-    int i;
-    int r;
-    int or_x;
-    int or_y;
+    char **split;
 
-    i = 0;
-    or_x = player.x_p;
-    or_y = player.y_p;
-    while (i < info.win_width)
+    split = ft_split(str, '.');
+    if (ft_strncmp(split[1], "cub", 20))
+        return (0);
+    if (split[2] != 0)
+        return (0);
+    return (1);
+}
+
+void    give_col(t_col fc, char c)
+{
+    if (c == 'f')
     {
-        r = 0;
-        while (r < rays[i].distance)
-        {
-            player.x_p = or_x + (r * cos(rays[i].ray_angle));
-            player.y_p = or_y + (r * sin(rays[i].ray_angle));
-            put_pix(MINI_MAP * player.x_p, MINI_MAP * player.y_p, player.color);
-            r++;
-        }
-        i++;
+        info.flr_co = fc.r;
+        info.flr_co = (info.flr_co << 8) + fc.g;
+        info.flr_co = (info.flr_co << 8) + fc.b;
+    }
+    else if (c == 'c')
+    {
+        info.cel_co = fc.r;
+        info.cel_co = (info.cel_co << 8) + fc.g;
+        info.cel_co = (info.cel_co << 8) + fc.b;
     }
 }

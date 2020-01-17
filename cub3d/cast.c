@@ -105,9 +105,15 @@ void    cast_ray(float ray_angle, int stripid, t_player player)
     ? dist_p(player.x_p, player.y_p, vert.wall_hit_x, vert.wall_hit_y)
     : INT_MAX;
     if (vert_hit_distance < horz_hit_distance)
+    {
         give_values(vert, ray_angle, stripid, vert_hit_distance);
+        rays[stripid].is_vertical = 1;
+    }
     else
-        give_values(horz, ray_angle, stripid, horz_hit_distance); 
+    {
+        give_values(horz, ray_angle, stripid, horz_hit_distance);
+        rays[stripid].is_vertical = 0;
+    }
 }
 
 void    cast_all_rays(t_player player)
