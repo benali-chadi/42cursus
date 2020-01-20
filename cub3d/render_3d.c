@@ -16,9 +16,9 @@ void draw_wall(int x, float wall_height, int i)
     x_end = x + WALL_WIDTH;
     or_x = x;
     if (rays[x].is_vertical)
-        x_tex = (int)rays[x].wall_hit_y % info.tile_size_y;
+        x_tex = (int)rays[x].wall_hit_y % TILE_SIZE;
     else
-        x_tex = (int)rays[x].wall_hit_x % info.tile_size_x;
+        x_tex = (int)rays[x].wall_hit_x % TILE_SIZE;
     while (y < y_end)
     {
         x = or_x;
@@ -26,7 +26,8 @@ void draw_wall(int x, float wall_height, int i)
         while (x < x_end)
         {
             int color = tex[i].tex[x_tex + (y_tex * tex[i].img_width)];
-            put_pix(x, y, color);
+            if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
+                put_pix(x, y, color);
             x++;
         }
         y++;
@@ -44,7 +45,8 @@ void    draw_flr()
         x = 0;
         while (x < info.win_width)
         {
-            put_pix(x, y, info.flr_co);
+            if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
+                put_pix(x, y, info.flr_co);
             x++;
         }
         y++;
@@ -64,7 +66,8 @@ void    draw_cel()
         x = 0;
         while (x < info.win_width)
         {
-            put_pix(x, y, info.cel_co);
+            if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
+                put_pix(x, y, info.cel_co);
             x++;
         }
         y++;
@@ -76,13 +79,13 @@ void    init_tex(int i)
     if (tex[i].ptr)
         mlx_destroy_image(info.mlx_ptr, tex[i].ptr);
     if (i == 0)
-        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "bluestone.XPM", &tex[i].img_width, &tex[i].img_height);
+        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "textures/mossy.xpm", &tex[i].img_width, &tex[i].img_height);
     else if (i == 1)
-        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "greystone.XPM", &tex[i].img_width, &tex[i].img_height);
+        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "textures/colorstone.xpm", &tex[i].img_width, &tex[i].img_height);
     else if (i == 2)
-        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "15.XPM", &tex[i].img_width, &tex[i].img_height);
+        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "textures/eagle.xpm", &tex[i].img_width, &tex[i].img_height);
     else if (i == 3)
-        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "wood.XPM", &tex[i].img_width, &tex[i].img_height);
+        tex[i].ptr = mlx_xpm_file_to_image(info.mlx_ptr, "textures/redbrick.xpm", &tex[i].img_width, &tex[i].img_height);
     tex[i].tex = (int *)mlx_get_data_addr(tex[i].ptr, &tex[i].bpp, &tex[i].size_line, &tex[i].endian);
 }
 
@@ -103,7 +106,7 @@ void    render_3d(float direction)
     while (i < info.win_width)
     {
         distance = rays[i].distance * cos(rays[i].ray_angle - (direction * VAL));
-        wall_height = (info.tile_size_y / distance) * dist_proj;
+        wall_height = (TILE_SIZE / distance) * dist_proj;
         if (rays[i].is_ray_facing_up && !rays[i].is_vertical)
             draw_wall(i * WALL_WIDTH, wall_height, 0);
         else if (rays[i].is_ray_facing_down && !rays[i].is_vertical)

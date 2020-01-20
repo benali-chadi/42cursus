@@ -5,27 +5,27 @@ void horz_inter(t_ray_hit *horz, t_player player, int stripid, float ray_angle)
     float next_touch_x;
     float next_touch_y;
 
-    horz->y_intercept = floor(player.y_p / info.tile_size_y) * info.tile_size_y;
-    horz->y_intercept += rays[stripid].is_ray_facing_down ? info.tile_size_y : 0;
+    horz->y_intercept = floor(player.y_p / TILE_SIZE) * TILE_SIZE;
+    horz->y_intercept += rays[stripid].is_ray_facing_down ? TILE_SIZE : 0;
 
     horz->to_check = rays[stripid].is_ray_facing_up ? -1 : 0;
     
     horz->x_intercept = player.x_p - (player.y_p - horz->y_intercept) / tan(ray_angle);
 
-    horz->y_step = info.tile_size_y;
+    horz->y_step = TILE_SIZE;
     horz->y_step *= rays[stripid].is_ray_facing_up ? -1 : 1;
 
     horz->x_step = horz->y_step / tan(ray_angle);
 
     next_touch_x = horz->x_intercept;
     next_touch_y = horz->y_intercept;
-    while (next_touch_x >= 0 && next_touch_x < info.win_width && next_touch_y >= 0 && next_touch_y < info.win_height)
+    while (next_touch_x >= 0 && next_touch_x < info.win_x && next_touch_y >= 0 && next_touch_y < info.win_y)
     {
         if(has_wall(next_touch_y + horz->to_check, next_touch_x))
         {
             horz->wall_hit_x = next_touch_x;
             horz->wall_hit_y = next_touch_y;
-            horz->wall_content = map[(int)next_touch_y / info.tile_size_y][(int)next_touch_x / info.tile_size_x];
+            horz->wall_content = map[(int)next_touch_y / TILE_SIZE][(int)next_touch_x / TILE_SIZE];
             horz->found_hit = 1;
             break;
         }
@@ -42,27 +42,27 @@ void vert_inter(t_ray_hit *vert, t_player player, int stripid, float ray_angle)
     float next_touch_x;
     float next_touch_y;
 
-    vert->x_intercept = floor(player.x_p / info.tile_size_x) * info.tile_size_x;
-    vert->x_intercept += rays[stripid].is_ray_facing_right ? info.tile_size_x : 0;
+    vert->x_intercept = floor(player.x_p / TILE_SIZE) * TILE_SIZE;
+    vert->x_intercept += rays[stripid].is_ray_facing_right ? TILE_SIZE : 0;
 
     vert->to_check = rays[stripid].is_ray_facing_left ? -1 : 0;
     
     vert->y_intercept = player.y_p - (player.x_p - vert->x_intercept) * tan(ray_angle);
 
-    vert->x_step = info.tile_size_x;
+    vert->x_step = TILE_SIZE;
     vert->x_step *= rays[stripid].is_ray_facing_left ? -1 : 1;
 
     vert->y_step = vert->x_step * tan(ray_angle);
 
     next_touch_x = vert->x_intercept;
     next_touch_y = vert->y_intercept;
-    while (next_touch_x >= 0 && next_touch_x < info.win_width && next_touch_y >= 0 && next_touch_y < info.win_height)
+    while (next_touch_x >= 0 && next_touch_x < info.win_x && next_touch_y >= 0 && next_touch_y < info.win_y)
     {
         if(has_wall(next_touch_y, next_touch_x + vert->to_check))
         {
             vert->wall_hit_x = next_touch_x;
             vert->wall_hit_y = next_touch_y;
-            vert->wall_content = map[(int)next_touch_y / info.tile_size_y][(int)next_touch_x / info.tile_size_y];
+            vert->wall_content = map[(int)next_touch_y / TILE_SIZE][(int)next_touch_x / TILE_SIZE];
             vert->found_hit = 1;
             break;
         }

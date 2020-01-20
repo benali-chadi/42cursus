@@ -29,8 +29,10 @@ void    init_info(t_col f, t_col c, int *r, int count_j)
     info.win_height = r[1];
     give_col(f, 'f');
     give_col(c, 'c');
-    info.tile_size_x = info.win_width / info.map_x;
-    info.tile_size_y = info.win_height / info.map_y;
+    // info.tile_size_x = info.win_width / info.map_x;
+    // info.tile_size_y = info.win_height / info.map_y;
+    info.win_x = info.map_x * TILE_SIZE;
+    info.win_y = info.map_y * TILE_SIZE;
 }
 
 int     init_map(char *line)
@@ -48,7 +50,6 @@ int     init_map(char *line)
         else if (ft_isalpha(*line))
         {
             map[count_i][j] = *line;
-            // printf("lien = %d map = %d\n", *line, map[count_i][j]);
             j++;
         }
         line++;

@@ -20,9 +20,12 @@
 # define FOV_ANGLE (60 * VAL)
 # define MINI_MAP 0.2
 # define WALL_WIDTH 1
+# define TILE_SIZE 64
 
 # define INCREMENT_Y_UD sin(player->direction * VAL) * 5
 # define INCREMENT_X_UD cos(player->direction * VAL) * 5
+# define INCREMENT_Y_LR sin((player->direction + 90 ) * VAL) * 5
+# define INCREMENT_X_LR cos((player->direction + 90 ) * VAL) * 5
 
 
 /*
@@ -87,8 +90,10 @@ typedef struct s_info
     int     flr_co;
     int     cel_co;
     int     count;
-    int     tile_size_x;
-    int     tile_size_y;
+    int     win_x;
+    int     win_y;
+    // int     tile_size_x;
+    // int     tile_size_y;
 }               t_info;
 
 /*
@@ -141,10 +146,7 @@ int     move(t_player *player);
 
 void    init_img();
 void    put_pix(int x, int y, int color);
-void    put_character(t_player player);
-void    put_square(t_player player, int color, int num);
 void    draw_map(t_player *player);
-void    draw_rays(t_player player);
 
 /*
 **File reading
@@ -174,5 +176,6 @@ int     has_wall(float y, float x);
 float   normalize_angle(float angle);
 int     normalize_angle_deg(int angle);
 int     num(int n);
+void    init_player(t_player *player, int i);
 
 #endif

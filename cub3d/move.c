@@ -18,9 +18,9 @@ int     key_press(int key, t_player *player)
     if (key == 2)
         player->walk_direction = 2;
     if (key == 124)
-        player->turn_direction = 3;
+        player->turn_direction = 2;
     if (key == 123)
-        player->turn_direction = -3;
+        player->turn_direction = -2;
     if (key == 53)
     {
         mlx_destroy_window(info.mlx_ptr, info.win_ptr);
@@ -38,49 +38,54 @@ int     key_release(int key, t_player *player)
     return (0);
 }
 
-void    update(t_player *player)
+void    render(t_player *player)
 {
     init_img();
     cast_all_rays(*player);
     render_3d(player->direction);
     draw_map(player);
-    put_character(*player);
-    draw_rays(*player);
+    // put_character(*player);
+    // draw_rays(*player);
     mlx_put_image_to_window(info.mlx_ptr, info.win_ptr, info.img_ptr, 0, 0);
 }
 
 int     move(t_player *player)
 {
-    float angle;
+    // int     to_check_ud;
+    // int     to_check_lr;
 
-    angle = player->direction + 90;
-    angle = normalize_angle_deg(angle);
+    // to_check_ud = (player->direction >= 0 && player->direction <= 90) ? 10 : -10;
+    // to_check_lr = ((player->direction + 90) >= 0 && (player->direction + 90) <= 90) ? -10 : 10;
     if (player->walk_direction == 1)
-        if (!has_wall(player->y_p + INCREMENT_Y_UD, player->x_p + INCREMENT_X_UD))
+    {
+        if (!has_wall((player->y_p + INCREMENT_Y_UD), (player->x_p + INCREMENT_X_UD)))
         {
             player->y_p += INCREMENT_Y_UD;
             player->x_p += INCREMENT_X_UD; 
         }
+    }
     if (player->walk_direction == -1)
-        if (!has_wall(player->y_p - INCREMENT_Y_UD, player->x_p - INCREMENT_X_UD))
+    {
+        if (!has_wall((player->y_p - INCREMENT_Y_UD), (player->x_p - INCREMENT_X_UD)))
         {
             player->y_p -= INCREMENT_Y_UD;
             player->x_p -= INCREMENT_X_UD; 
         }
+    }
     if (player->walk_direction == 2)
-        if (!has_wall(player->y_p + sin(angle * VAL) * 5, player->x_p + cos(angle * VAL) * 5))
+        if (!has_wall((player->y_p + INCREMENT_Y_LR), (player->x_p + INCREMENT_X_LR)))
         {
-            player->y_p += sin(angle * VAL) * 5;
-            player->x_p += cos(angle * VAL) * 5;
+            player->y_p += INCREMENT_Y_LR;
+            player->x_p += INCREMENT_X_LR;
         }
     if (player->walk_direction == -2)
-        if (!has_wall(player->y_p - sin(angle * VAL) * 5, player->x_p - cos(angle * VAL) * 5))
+        if (!has_wall((player->y_p - INCREMENT_Y_LR), (player->x_p - INCREMENT_X_LR)))
         {
-            player->y_p -= sin(angle * VAL) * 5;
-            player->x_p -= cos(angle * VAL) * 5;
+            player->y_p -= INCREMENT_Y_LR;
+            player->x_p -= INCREMENT_X_LR;
         }
     player->direction += player->turn_direction;
     player->direction = normalize_angle_deg(player->direction);
-    update(player);
+    render(player);
     return (0);
 }
