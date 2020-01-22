@@ -18,9 +18,9 @@ int     key_press(int key, t_player *player)
     if (key == 2)
         player->walk_direction = 2;
     if (key == 124)
-        player->turn_direction = 2;
+        player->turn_direction = 3;
     if (key == 123)
-        player->turn_direction = -2;
+        player->turn_direction = -3;
     if (key == 53)
     {
         mlx_destroy_window(info.mlx_ptr, info.win_ptr);
@@ -51,14 +51,9 @@ void    render(t_player *player)
 
 int     move(t_player *player)
 {
-    // int     to_check_ud;
-    // int     to_check_lr;
-
-    // to_check_ud = (player->direction >= 0 && player->direction <= 90) ? 10 : -10;
-    // to_check_lr = ((player->direction + 90) >= 0 && (player->direction + 90) <= 90) ? -10 : 10;
     if (player->walk_direction == 1)
     {
-        if (!has_wall((player->y_p + INCREMENT_Y_UD), (player->x_p + INCREMENT_X_UD)))
+        if (!has_wall((player->y_p + INCREMENT_Y_UD * 10), (player->x_p + INCREMENT_X_UD * 10)))
         {
             player->y_p += INCREMENT_Y_UD;
             player->x_p += INCREMENT_X_UD; 
@@ -66,26 +61,26 @@ int     move(t_player *player)
     }
     if (player->walk_direction == -1)
     {
-        if (!has_wall((player->y_p - INCREMENT_Y_UD), (player->x_p - INCREMENT_X_UD)))
+        if (!has_wall((player->y_p - INCREMENT_Y_UD * 10), (player->x_p - INCREMENT_X_UD * 10)))
         {
             player->y_p -= INCREMENT_Y_UD;
             player->x_p -= INCREMENT_X_UD; 
         }
     }
     if (player->walk_direction == 2)
-        if (!has_wall((player->y_p + INCREMENT_Y_LR), (player->x_p + INCREMENT_X_LR)))
+        if (!has_wall((player->y_p + INCREMENT_Y_LR * 10), (player->x_p + INCREMENT_X_LR * 10)))
         {
             player->y_p += INCREMENT_Y_LR;
             player->x_p += INCREMENT_X_LR;
         }
     if (player->walk_direction == -2)
-        if (!has_wall((player->y_p - INCREMENT_Y_LR), (player->x_p - INCREMENT_X_LR)))
+        if (!has_wall((player->y_p - INCREMENT_Y_LR * 10), (player->x_p - INCREMENT_X_LR * 10)))
         {
             player->y_p -= INCREMENT_Y_LR;
             player->x_p -= INCREMENT_X_LR;
         }
     player->direction += player->turn_direction;
-    player->direction = normalize_angle_deg(player->direction);
+    // player->direction = normalize_angle_deg(player->direction);
     render(player);
     return (0);
 }

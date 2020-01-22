@@ -22,10 +22,10 @@
 # define WALL_WIDTH 1
 # define TILE_SIZE 64
 
-# define INCREMENT_Y_UD sin(player->direction * VAL) * 5
-# define INCREMENT_X_UD cos(player->direction * VAL) * 5
-# define INCREMENT_Y_LR sin((player->direction + 90 ) * VAL) * 5
-# define INCREMENT_X_LR cos((player->direction + 90 ) * VAL) * 5
+# define INCREMENT_Y_UD (sin(player->direction * VAL) * 6.8)
+# define INCREMENT_X_UD (cos(player->direction * VAL) * 6.8)
+# define INCREMENT_Y_LR (sin((player->direction + 90 ) * VAL) * 6.8)
+# define INCREMENT_X_LR (cos((player->direction + 90 ) * VAL) * 6.8)
 
 
 /*

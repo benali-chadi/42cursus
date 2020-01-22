@@ -6,7 +6,7 @@ void draw_wall(int x, float wall_height, int i)
     float   y_end;
     float   or_x;
     int     x_end;
-    // int     color;
+    int     color;
     int     x_tex;
     int     y_tex;
 
@@ -25,7 +25,7 @@ void draw_wall(int x, float wall_height, int i)
         y_tex = (y - top_pixel) * ((float)tex[i].img_height / wall_height);
         while (x < x_end)
         {
-            int color = tex[i].tex[x_tex + (y_tex * tex[i].img_width)];
+            color = tex[i].tex[x_tex + (y_tex * tex[i].img_width)];
             if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
                 put_pix(x, y, color);
             x++;
