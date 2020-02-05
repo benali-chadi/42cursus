@@ -21,7 +21,7 @@ void horz_inter(t_ray_hit *horz, t_player player, int stripid, float ray_angle)
     next_touch_y = horz->y_intercept;
     while (next_touch_x >= 0 && next_touch_x < info.win_x && next_touch_y >= 0 && next_touch_y < info.win_y)
     {
-        if(has_wall(next_touch_y + horz->to_check, next_touch_x))
+        if(has_wall_ray(next_touch_y + horz->to_check, next_touch_x))
         {
             horz->wall_hit_x = next_touch_x;
             horz->wall_hit_y = next_touch_y;
@@ -58,7 +58,7 @@ void vert_inter(t_ray_hit *vert, t_player player, int stripid, float ray_angle)
     next_touch_y = vert->y_intercept;
     while (next_touch_x >= 0 && next_touch_x < info.win_x && next_touch_y >= 0 && next_touch_y < info.win_y)
     {
-        if(has_wall(next_touch_y, next_touch_x + vert->to_check))
+        if(has_wall_ray(next_touch_y, next_touch_x + vert->to_check))
         {
             vert->wall_hit_x = next_touch_x;
             vert->wall_hit_y = next_touch_y;

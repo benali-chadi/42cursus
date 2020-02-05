@@ -21,10 +21,12 @@ void    init_player(t_player *player, int i)
 void    setup(int fd)
 {
     read_file(fd);
+    count = sprite;
     info.count = 0;
     info.mlx_ptr = mlx_init();
 	info.win_ptr = mlx_new_window(info.mlx_ptr, info.win_width, info.win_height, "mlx 1337");
     info.img_ptr = mlx_new_image(info.mlx_ptr, info.win_width, info.win_height);
+    spt = (t_spt *)malloc(sizeof(t_spt) * sprite);
 }
 
 void    update(t_player *player)
@@ -37,9 +39,10 @@ void    update(t_player *player)
 
 int     main(int ac, char **av)
 {
-    t_player player;
-    int     fd;
+    t_player    player;
+    int         fd;
 
+    sprite = 0;
     if (ac < 2)
     {
         perror("Error");

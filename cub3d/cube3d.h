@@ -121,6 +121,17 @@ typedef struct  s_tex
     int     endian;
 }               t_tex;
 
+/*
+**Sprites struct
+*/
+
+typedef struct  s_spt{
+    void    *ptr;
+    int     *data;
+    float   x;
+    float   y;
+    float   distance;
+}               t_spt;
 
 /*
 **Global variables
@@ -129,7 +140,10 @@ typedef struct  s_tex
 t_info  info;
 t_rays  rays[5120];
 t_tex   tex[4];
+t_spt   *spt;
 int     map[1024][1024];
+int     sprite;
+int     count;
 
 /*
 **To move
@@ -166,7 +180,9 @@ void    ceiling(char *line, t_col *c);
 
 void    cast_all_rays(t_player player);
 float   dist_p(float x1, float y1, float x2, float y2);
-void    render_3d(float direction);
+void    render_3d(float direction, t_player player);
+int     has_wall_ray(float y, float x);
+void    update_spr_dis(t_player player);
 
 /*
 **Tools

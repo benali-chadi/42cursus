@@ -14,8 +14,42 @@ void init_img()
 
 void	put_pix(int x, int y, int color)
 {
-    // if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
+    if (x >= 0 && x < info.win_width && y >= 0 && y < info.win_height)
         info.img_data[x + (y * info.win_width)] = color;
+}
+
+void    init_sprite(int i, int j, t_player player)
+{
+    sprite--;
+    spt[sprite].y = i * TILE_SIZE;
+    spt[sprite].x = j * TILE_SIZE;
+    spt[sprite].distance = dist_p(spt[sprite].x, spt[sprite].y, player.x_p, player.y_p);
+}
+
+void    update_spr_dis(t_player player)
+{
+    int i;
+    int j;
+    t_spt temp;
+
+    i = -1;
+    while (++i < count)
+        spt[i].distance = dist_p(spt[i].x, spt[i].y, player.x_p, player.y_p);
+    /*
+    **Sort the array
+    */
+    i = -1;
+    while (++i < count)
+    {
+        j = -1;
+        while (++j < count - i)
+            if (spt[j].distance < spt[j + 1].distance)
+            {
+                temp = spt[j];
+                spt[j] = spt[j + 1];
+                spt[j + 1] = temp;
+            }
+    }
 }
 
 void    draw_map(t_player *player)
@@ -34,6 +68,8 @@ void    draw_map(t_player *player)
         {
             if (ft_isalpha(map[i][j]) && !info.count)
                 init_player(player, map[i][j]);
+            if (map[i][j] == 2 && sprite)
+                init_sprite(i, j, *player);
             player->x_m += TILE_SIZE;
             j++;
         }
