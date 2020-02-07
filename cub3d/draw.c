@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbenali- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/05 16:40:30 by cbenali-          #+#    #+#             */
+/*   Updated: 2020/02/05 16:40:32 by cbenali-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 void init_img()
@@ -20,10 +32,10 @@ void	put_pix(int x, int y, int color)
 
 void    init_sprite(int i, int j, t_player player)
 {
-    sprite--;
-    spt[sprite].y = i * TILE_SIZE;
-    spt[sprite].x = j * TILE_SIZE;
-    spt[sprite].distance = dist_p(spt[sprite].x, spt[sprite].y, player.x_p, player.y_p);
+    g_sprite--;
+    spt[g_sprite].y = i * TILE_SIZE;
+    spt[g_sprite].x = j * TILE_SIZE;
+    spt[g_sprite].distance = dist_p(spt[g_sprite].x, spt[g_sprite].y, player.x_p, player.y_p);
 }
 
 void    update_spr_dis(t_player player)
@@ -33,16 +45,16 @@ void    update_spr_dis(t_player player)
     t_spt temp;
 
     i = -1;
-    while (++i < count)
+    while (++i < g_count)
         spt[i].distance = dist_p(spt[i].x, spt[i].y, player.x_p, player.y_p);
     /*
     **Sort the array
     */
     i = -1;
-    while (++i < count)
+    while (++i < g_count)
     {
         j = -1;
-        while (++j < count - i)
+        while (++j < g_count - i)
             if (spt[j].distance < spt[j + 1].distance)
             {
                 temp = spt[j];
@@ -68,7 +80,7 @@ void    draw_map(t_player *player)
         {
             if (ft_isalpha(map[i][j]) && !info.count)
                 init_player(player, map[i][j]);
-            if (map[i][j] == 2 && sprite)
+            if (map[i][j] == 2 && g_sprite)
                 init_sprite(i, j, *player);
             player->x_m += TILE_SIZE;
             j++;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbenali- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/05 16:40:20 by cbenali-          #+#    #+#             */
+/*   Updated: 2020/02/05 16:40:21 by cbenali-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
@@ -134,16 +146,32 @@ typedef struct  s_spt{
 }               t_spt;
 
 /*
+**Draw wall sprite
+*/
+
+typedef struct  s_drw_wll {
+    float   y;
+    float   y_end;
+    float   or_x;
+    int     x_end;
+    int     color;
+    int     x_tex;
+    int     y_tex;
+    int     top_pixel;
+}               t_drw_wll;
+
+/*
 **Global variables
 */
 
-t_info  info;
-t_rays  rays[5120];
-t_tex   tex[4];
-t_spt   *spt;
-int     map[1024][1024];
-int     sprite;
-int     count;
+t_info      info;
+t_rays      rays[5120];
+t_tex       tex[4];
+t_spt       *spt;
+t_drw_wll   drw_wll; 
+int         map[1024][1024];
+int         g_sprite;
+int         g_count;
 
 /*
 **To move
@@ -183,6 +211,7 @@ float   dist_p(float x1, float y1, float x2, float y2);
 void    render_3d(float direction, t_player player);
 int     has_wall_ray(float y, float x);
 void    update_spr_dis(t_player player);
+void    ft_sprite(t_player player, int i);
 
 /*
 **Tools

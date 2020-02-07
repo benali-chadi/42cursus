@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbenali- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/05 16:40:42 by cbenali-          #+#    #+#             */
+/*   Updated: 2020/02/05 16:40:50 by cbenali-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 int     key_destroy(int key, void *ptr)
@@ -45,16 +57,6 @@ void    render(t_player *player)
     update_spr_dis(*player);
     cast_all_rays(*player);
     render_3d(player->direction, *player);
-    
-    
-    // int i = 0;
-    // while (i < count)
-    // {
-    //     printf("x : %f\ty : %f\tdis : %f\ti : %d\n", spt[i].x, spt[i].y, spt[i].distance, i);
-    //     i++;
-    // }
-    // put_character(*player);
-    // draw_rays(*player);
     mlx_put_image_to_window(info.mlx_ptr, info.win_ptr, info.img_ptr, 0, 0);
 }
 

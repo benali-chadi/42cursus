@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbenali- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/05 16:40:58 by cbenali-          #+#    #+#             */
+/*   Updated: 2020/02/05 16:41:00 by cbenali-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 int     r[2];
@@ -44,7 +56,7 @@ int     init_map(char *line)
         {
             map[count_i][j] = *line - 48;
             if (map[count_i][j] == 2)
-                sprite++;
+                g_sprite++;
             j++;
         }
         else if (ft_isalpha(*line))
@@ -56,6 +68,31 @@ int     init_map(char *line)
     }
     count_i++;
     return (j);
+}
+
+void    check_map(int map[1024][1024])
+{
+    int i;
+    int j;
+
+    i = -1;
+    while (++i < info.map_y)
+    {
+        j = -1;
+        while (++j < info.map_x)
+        {
+            if ((i == 0 || i == info.map_y - 1) && map[i][j] != 1)
+            {
+                ft_putstr_fd("Error\nThe map must be surrounded by walls\n", 1);
+                exit(-1);
+            }
+            if ((j == 0 || j == info.map_x - 1) && map[i][j] != 1)
+            {
+                ft_putstr_fd("Error\nThe map must be surrounded by walls\n", 1);
+                exit(-1);
+            }
+        }
+    }
 }
 
 void    read_file(int fd)
@@ -90,4 +127,5 @@ void    read_file(int fd)
     if (ft_isdigit(line[0]))
         count_j = init_map(line);
     init_info(f, c, r, count_j);
+    check_map(map);
 }

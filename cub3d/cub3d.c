@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbenali- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/05 16:40:08 by cbenali-          #+#    #+#             */
+/*   Updated: 2020/02/05 16:40:10 by cbenali-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 void    init_player(t_player *player, int i)
@@ -18,15 +30,17 @@ void    init_player(t_player *player, int i)
     info.count++;
 }
 
-void    setup(int fd)
+int    setup(int fd)
 {
     read_file(fd);
-    count = sprite;
+    g_count = g_sprite;
     info.count = 0;
     info.mlx_ptr = mlx_init();
 	info.win_ptr = mlx_new_window(info.mlx_ptr, info.win_width, info.win_height, "mlx 1337");
     info.img_ptr = mlx_new_image(info.mlx_ptr, info.win_width, info.win_height);
-    spt = (t_spt *)malloc(sizeof(t_spt) * sprite);
+    if(!(spt = (t_spt *)malloc(sizeof(t_spt) * g_sprite)))
+        return(0);
+    return (1);
 }
 
 void    update(t_player *player)
@@ -42,7 +56,7 @@ int     main(int ac, char **av)
     t_player    player;
     int         fd;
 
-    sprite = 0;
+    g_sprite = 0;
     if (ac < 2)
     {
         perror("Error");
@@ -54,7 +68,8 @@ int     main(int ac, char **av)
         perror("Error");
         exit(-1);
     }
-    setup(fd);
+    if (!(setup(fd)))
+        return (-1);
     update(&player);
 	mlx_loop(info.mlx_ptr);
     return(0);
