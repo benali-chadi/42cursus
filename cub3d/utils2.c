@@ -29,16 +29,16 @@ int     num(int n)
 
 int     has_wall(float y, float x)
 {
-    if (y > 0 && y < info.win_y && x > 0 && x < info.win_x)
-        return (map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 0 && 
-        !ft_isalpha(map[(int)y / TILE_SIZE][(int)x / TILE_SIZE]));
+    if (y > 0 && y < g_info.win_y && x > 0 && x < g_info.win_x)
+        return (g_map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] != 0 && 
+        !ft_isalpha(g_map[(int)y / TILE_SIZE][(int)x / TILE_SIZE]));
     return (1);
 }
 
 int     has_wall_ray(float y, float x)
 {
-    if (y > 0 && y < info.win_y && x > 0 && x < info.win_x)
-        return (map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] == 1);
+    if (y > 0 && y < g_info.win_y && x > 0 && x < g_info.win_x)
+        return (g_map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] == 1);
     return (1);
 }
 

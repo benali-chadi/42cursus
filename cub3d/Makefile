@@ -8,7 +8,9 @@ NAMELIB = libft.a
 
 NAME = CUBE3D.a
 
-SRC = cub3d.c move.c utils.c cast.c read_file.c render_3d.c
+EXEC = run
+
+SRC = cast.c cub3d.c draw.c move.c read_file.c render_3d.c render_spt.c utils2.c utils3.c
 
 O = $(SRC:.c=.o)
 
@@ -19,10 +21,7 @@ $(NAMELIB) :
 	cp libft/$(NAMELIB) .
 
 $(NAME) : $(NAMELIB)
-	ar x $(NAMELIB)
-	gcc $(FLAGS) -c $(SRC) $(MLX) $(FRAMEWORKS)
-	ar rc $(NAME) *.o
-	ranlib $(NAME)
+	gcc $(FLAGS) $(SRC) -g3 -I /usr/local/include libft.a gnl/get_next_line.c gnl/get_next_line_utils.c -L /usr/local/lib -lmlx -framework OpenGl -framework Appkit -D BUFFER_SIZE=20 -o $(EXEC)
 
 clean :
 	make clean -C libft/
@@ -31,5 +30,6 @@ clean :
 fclean : clean
 	make fclean -C libft/
 	rm -f *.a
+	rm -f $(EXEC)
 
 re : fclean all

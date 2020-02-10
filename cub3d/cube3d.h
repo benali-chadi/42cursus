@@ -29,7 +29,7 @@
 # define TWO_PI 6.283118530
 # define VAL (PI / 180)
 
-# define FOV_ANGLE (60 * VAL)
+# define FOV (60 * VAL)
 # define MINI_MAP 0.2
 # define WALL_WIDTH 1
 # define TILE_SIZE 64
@@ -142,6 +142,8 @@ typedef struct  s_spt{
     int     *data;
     float   x;
     float   y;
+    int     x_s;
+    int     y_s;
     float   distance;
 }               t_spt;
 
@@ -164,12 +166,12 @@ typedef struct  s_drw_wll {
 **Global variables
 */
 
-t_info      info;
-t_rays      rays[5120];
-t_tex       tex[4];
-t_spt       *spt;
-t_drw_wll   drw_wll; 
-int         map[1024][1024];
+t_info      g_info;
+t_rays      g_rays[5120];
+t_tex       g_tex[4];
+t_spt       *g_spt;
+t_drw_wll   g_drw_wll; 
+int         g_map[1024][1024];
 int         g_sprite;
 int         g_count;
 

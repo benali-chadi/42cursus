@@ -15,7 +15,7 @@
 int     key_destroy(int key, void *ptr)
 {
     key = (int)ptr;
-    mlx_destroy_window(info.mlx_ptr, info.win_ptr);
+    mlx_destroy_window(g_info.mlx_ptr, g_info.win_ptr);
     exit(0);
 }
 
@@ -35,7 +35,7 @@ int     key_press(int key, t_player *player)
         player->turn_direction = -3;
     if (key == 53)
     {
-        mlx_destroy_window(info.mlx_ptr, info.win_ptr);
+        mlx_destroy_window(g_info.mlx_ptr, g_info.win_ptr);
         exit(0);
     }
     return (0);
@@ -57,7 +57,7 @@ void    render(t_player *player)
     update_spr_dis(*player);
     cast_all_rays(*player);
     render_3d(player->direction, *player);
-    mlx_put_image_to_window(info.mlx_ptr, info.win_ptr, info.img_ptr, 0, 0);
+    mlx_put_image_to_window(g_info.mlx_ptr, g_info.win_ptr, g_info.img_ptr, 0, 0);
 }
 
 int     move(t_player *player)

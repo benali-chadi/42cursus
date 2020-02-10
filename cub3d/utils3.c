@@ -12,6 +12,8 @@
 
 #include "cube3d.h"
 
+extern int g_c;
+
 void    flr(char *line, t_col *f)
 {
     char **split;
@@ -20,6 +22,7 @@ void    flr(char *line, t_col *f)
     f->r = ft_atoi(split[0]);
     f->g = ft_atoi(split[1]);
     f->b = ft_atoi(split[2]);
+    g_c++;
 }
 
 void    ceiling(char *line, t_col *c)
@@ -30,6 +33,7 @@ void    ceiling(char *line, t_col *c)
     c->r = ft_atoi(split[0]);
     c->g = ft_atoi(split[1]);
     c->b = ft_atoi(split[2]);
+    g_c++;
 }
 
 int     check_name(char *str)
@@ -48,14 +52,14 @@ void    give_col(t_col fc, char c)
 {
     if (c == 'f')
     {
-        info.flr_co = fc.r;
-        info.flr_co = (info.flr_co << 8) + fc.g;
-        info.flr_co = (info.flr_co << 8) + fc.b;
+        g_info.flr_co = fc.r;
+        g_info.flr_co = (g_info.flr_co << 8) + fc.g;
+        g_info.flr_co = (g_info.flr_co << 8) + fc.b;
     }
     else if (c == 'c')
     {
-        info.cel_co = fc.r;
-        info.cel_co = (info.cel_co << 8) + fc.g;
-        info.cel_co = (info.cel_co << 8) + fc.b;
+        g_info.cel_co = fc.r;
+        g_info.cel_co = (g_info.cel_co << 8) + fc.g;
+        g_info.cel_co = (g_info.cel_co << 8) + fc.b;
     }
 }

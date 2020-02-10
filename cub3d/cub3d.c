@@ -27,28 +27,28 @@ void    init_player(t_player *player, int i)
     else if (i == 'E')
         player->direction = 180;
     player->color = 0x48CFAF;
-    info.count++;
+    g_info.count++;
 }
 
 int    setup(int fd)
 {
     read_file(fd);
     g_count = g_sprite;
-    info.count = 0;
-    info.mlx_ptr = mlx_init();
-	info.win_ptr = mlx_new_window(info.mlx_ptr, info.win_width, info.win_height, "mlx 1337");
-    info.img_ptr = mlx_new_image(info.mlx_ptr, info.win_width, info.win_height);
-    if(!(spt = (t_spt *)malloc(sizeof(t_spt) * g_sprite)))
+    g_info.count = 0;
+    g_info.mlx_ptr = mlx_init();
+	g_info.win_ptr = mlx_new_window(g_info.mlx_ptr, g_info.win_width, g_info.win_height, "mlx 1337");
+    g_info.img_ptr = mlx_new_image(g_info.mlx_ptr, g_info.win_width, g_info.win_height);
+    if(!(g_spt = (t_spt *)malloc(sizeof(t_spt) * g_sprite)))
         return(0);
     return (1);
 }
 
 void    update(t_player *player)
 {
-    mlx_hook(info.win_ptr, 2, 1L<<0, key_press, player);
-    mlx_hook(info.win_ptr, 3, 1L<<1, key_release, player);
-    mlx_hook(info.win_ptr, 17, 0L, key_destroy, (void *)0);
-    mlx_loop_hook(info.mlx_ptr, move, player);
+    mlx_hook(g_info.win_ptr, 2, 1L<<0, key_press, player);
+    mlx_hook(g_info.win_ptr, 3, 1L<<1, key_release, player);
+    mlx_hook(g_info.win_ptr, 17, 0L, key_destroy, (void *)0);
+    mlx_loop_hook(g_info.mlx_ptr, move, player);
 }
 
 int     main(int ac, char **av)
@@ -69,8 +69,11 @@ int     main(int ac, char **av)
         exit(-1);
     }
     if (!(setup(fd)))
-        return (-1);
+    {
+        ft_putstr_fd("Eroor\nAllocation error\n", 1);
+        exit(-1);
+    }
     update(&player);
-	mlx_loop(info.mlx_ptr);
+	mlx_loop(g_info.mlx_ptr);
     return(0);
 }
