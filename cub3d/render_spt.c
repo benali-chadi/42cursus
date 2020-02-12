@@ -20,7 +20,7 @@ void    render_spt(int x, int y, int sp_size, int k)
     int j;
     
     i = 0;
-    g_spt[k].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, "textures/barrel.xpm", &g_spt[k].x_s, &g_spt[k].y_s);
+    g_spt[k].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, g_info.paths.sp, &g_spt[k].x_s, &g_spt[k].y_s);
     g_spt[k].data = (int *)mlx_get_data_addr(g_spt[k].ptr, &a, &a, &a);
     while (i++ < sp_size)
     {
@@ -51,9 +51,9 @@ void    ft_sprite(t_player player, int i)
     while (sp_angle - (player.direction * VAL) < -PI)
         sp_angle += TWO_PI;
     if (g_info.win_height > g_info.win_width)
-        sp_size = (g_info.win_height / (float)g_spt[i].distance) * TILE_SIZE;
+        sp_size = (g_info.win_height / g_spt[i].distance) * TILE_SIZE;
     else
-        sp_size = (g_info.win_width / (float)g_spt[i].distance) * TILE_SIZE;
+        sp_size = (g_info.win_width / g_spt[i].distance) * TILE_SIZE;
     y_inter = g_info.win_height / 2 - sp_size / 2;
     x_inter = (sp_angle - player.direction * VAL) / FOV * g_info.win_width + (g_info.win_width / 2 - sp_size / 2);
     render_spt(x_inter, y_inter, sp_size, i);

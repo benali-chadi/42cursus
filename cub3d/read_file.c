@@ -23,14 +23,23 @@ void    resolution(char *line)
 	j = 0;
 	while(*line)
 	{
-		if (ft_isdigit(*line) && *line != '0')
+		if (ft_isdigit(*line) && *line && j < 2)
 		{
-			g_r[j] = ft_atoi(line);
+			if (j == 0)
+				g_r[j] = (ft_atoi(line) > 2550) ? 2550 : ft_atoi(line);
+			else
+				g_r[j] = (ft_atoi(line) > 1450) ? 1450 : ft_atoi(line);
+
 			line += num(g_r[j]);
 			j++;
 		}
 		if(*line)
 			line++;
+	}
+	if (j != 2)
+	{
+		ft_putstr_fd("Eroor\nNo enough resolution data\n", 1);
+		exit(-1);
 	}
 	g_c++;
 }
@@ -97,6 +106,56 @@ void    check_map()
 	}
 }
 
+void	store_paths(char *line)
+{
+	int i;
+
+	i = 0;
+	if (line[0] == 'N')
+	{
+		if (line[1] == 'O')
+			g_info.paths.no = ft_strtrim(line + 2, " \t");
+		else
+		{
+			ft_putstr_fd("Eroor\nInvalid name in north texture\n", 1);
+			exit(-1);
+		}
+	}
+	else if (line[0] == 'W')
+	{
+		if (line[1] == 'E')
+			g_info.paths.we = ft_strtrim(line + 2, " \t");
+		else
+		{
+			ft_putstr_fd("Eroor\nInvalid name in west texture\n", 1);
+			exit(-1);
+		}
+	}
+	else if (line[0] == 'E')
+	{
+		if (line[1] == 'A')
+			g_info.paths.ea = ft_strtrim(line + 2, " \t");
+		else
+		{
+			ft_putstr_fd("Eroor\nInvalid name in east texture\n", 1);
+			exit(-1);
+		}
+	}
+	else if (line[0] == 'S')
+	{
+		if (line[1] == 'O')
+			g_info.paths.so = ft_strtrim(line + 2, " \t");
+		else if (line[1] == ' ' || line[1] == '\t')
+			g_info.paths.sp = ft_strtrim(line + 1, " \t");
+		else
+		{
+			ft_putstr_fd("Eroor\nInvalid name in south texture, or sprite texture\n", 1);
+			exit(-1);
+		}
+	}
+	g_c++;
+}
+
 void    read_file(int fd)
 {
 	char    *line;
@@ -125,14 +184,14 @@ void    read_file(int fd)
 			ceiling(line + i, &c);
 		}
 		else if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
-			g_c++;
+			store_paths(line);
 		else if (ft_isdigit(line[0]))
 		{
 			if (g_c == 8)
 				count_j = init_map(line);
 			else
 			{
-				ft_putstr_fd("Eroor\nNo enough info in the file\n", 1);
+				ft_putstr_fd("Eroor\nNo enough info in the file or extra info\n", 1);
 				exit(-1);
 			}
 		}

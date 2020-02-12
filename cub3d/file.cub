@@ -1,10 +1,10 @@
 R 1200 500
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO textures/mossy.xpm
+SO textures/colorstone.xpm
+WE textures/eagle.xpm
+EA textures/redbrick.xpm
 
-S ./path_to_the_sprite_texture
+S textures/barrel.xpm
 F 20, 120, 20
 C 20,20,120
 

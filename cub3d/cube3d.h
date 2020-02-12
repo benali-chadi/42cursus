@@ -50,7 +50,7 @@ typedef struct s_player{
     float direction;
     int x_m;
     int y_m;
-    int color;
+    // int color;
     float turn_direction;
     float walk_direction;
 }               t_player;
@@ -85,6 +85,19 @@ typedef struct  s_ray_hit {
 
 }               t_ray_hit;
 
+
+/*
+**Paths structure
+*/
+
+typedef struct  s_paths {
+    char    *no;
+    char    *so;
+    char    *we;
+    char    *ea;
+    char    *sp;
+}               t_paths;
+
 /*
 **Info struct
 */
@@ -104,8 +117,8 @@ typedef struct s_info
     int     count;
     int     win_x;
     int     win_y;
-    // int     tile_size_x;
-    // int     tile_size_y;
+    int     save;
+    t_paths paths;
 }               t_info;
 
 /*

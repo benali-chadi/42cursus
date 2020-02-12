@@ -50,6 +50,14 @@ int     key_release(int key, t_player *player)
     return (0);
 }
 
+void    bmp_save()
+{
+    int fd;
+
+    fd = open("first_img.bmp", O_CREAT | O_WRONLY);
+    
+}
+
 void    render(t_player *player)
 {
     init_img();
@@ -57,6 +65,11 @@ void    render(t_player *player)
     update_spr_dis(*player);
     cast_all_rays(*player);
     render_3d(player->direction, *player);
+    if (g_info.save)
+    {
+        bmp_save();
+        exit(0);
+    }
     mlx_put_image_to_window(g_info.mlx_ptr, g_info.win_ptr, g_info.img_ptr, 0, 0);
 }
 

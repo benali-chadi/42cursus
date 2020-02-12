@@ -83,13 +83,13 @@ void    init_tex(int i)
     if (g_tex[i].ptr)
         mlx_destroy_image(g_info.mlx_ptr, g_tex[i].ptr);
     if (i == 0)
-        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, "textures/mossy.xpm", &g_tex[i].img_width, &g_tex[i].img_height);
+        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, g_info.paths.no, &g_tex[i].img_width, &g_tex[i].img_height);
     else if (i == 1)
-        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, "textures/colorstone.xpm", &g_tex[i].img_width, &g_tex[i].img_height);
+        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, g_info.paths.so, &g_tex[i].img_width, &g_tex[i].img_height);
     else if (i == 2)
-        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, "textures/eagle.xpm", &g_tex[i].img_width, &g_tex[i].img_height);
+        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, g_info.paths.we, &g_tex[i].img_width, &g_tex[i].img_height);
     else if (i == 3)
-        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, "textures/redbrick.xpm", &g_tex[i].img_width, &g_tex[i].img_height);
+        g_tex[i].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, g_info.paths.ea, &g_tex[i].img_width, &g_tex[i].img_height);
     g_tex[i].tex = (int *)mlx_get_data_addr(g_tex[i].ptr, &g_tex[i].bpp, &g_tex[i].size_line, &g_tex[i].endian);
 }
 
