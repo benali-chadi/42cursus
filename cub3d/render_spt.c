@@ -20,7 +20,11 @@ void    render_spt(int x, int y, int sp_size, int k)
     int j;
     
     i = 0;
-    g_spt[k].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, g_info.paths.sp, &g_spt[k].x_s, &g_spt[k].y_s);
+    if (!(g_spt[k].ptr = mlx_xpm_file_to_image(g_info.mlx_ptr, g_info.paths.sp, &g_spt[k].x_s, &g_spt[k].y_s)))
+    {
+        ft_putstr_fd("Error\nSprite texture file not valid\n", 1);
+        exit(-1);
+    }
     g_spt[k].data = (int *)mlx_get_data_addr(g_spt[k].ptr, &a, &a, &a);
     while (i++ < sp_size)
     {

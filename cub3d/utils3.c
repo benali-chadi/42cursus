@@ -16,23 +16,69 @@ extern int g_c;
 
 void    flr(char *line, t_col *f)
 {
-    char **split;
-
+    char    **split;
+    int     r;
+    int     g;
+    int     b;
+    
+    line = ft_strtrim(line, " /t");
     split = ft_split(line, ',');
-    f->r = ft_atoi(split[0]);
-    f->g = ft_atoi(split[1]);
-    f->b = ft_atoi(split[2]);
+    if (split[0] && split[1] && split[2] && !split[3])
+    {
+        r = ft_atoi(split[0]);
+        g = ft_atoi(split[1]);
+        b = ft_atoi(split[2]);
+        if (r >= 0 && r < 256 && g >= 0 && g < 256 && b >= 0 && b < 256)
+        {
+            f->r = r;
+            f->g = g;
+            f->b = b;
+        }
+        else
+        {
+            ft_putstr_fd("Error\nInvalid floor colors values\n", 1);
+            exit(-1);
+        }
+    }
+    else
+    {
+        ft_putstr_fd("Error\nNo or more than enough floor colors values\n", 1);
+        exit(-1);
+    }
     g_c++;
 }
 
 void    ceiling(char *line, t_col *c)
 {
     char **split;
+    int     r;
+    int     g;
+    int     b;
 
+    line = ft_strtrim(line, " /t");
     split = ft_split(line, ',');
-    c->r = ft_atoi(split[0]);
-    c->g = ft_atoi(split[1]);
-    c->b = ft_atoi(split[2]);
+    if (split[0] && split[1] && split[2] && !split[3])
+    {
+        r = ft_atoi(split[0]);
+        g = ft_atoi(split[1]);
+        b = ft_atoi(split[2]);
+        if (r >= 0 && r < 256 && g >= 0 && g < 256 && b >= 0 && b < 256)
+        {
+            c->r = r;
+            c->g = g;
+            c->b = b;
+        }
+        else
+        {
+            ft_putstr_fd("Error\nInvalid floor colors values\n", 1);
+            exit(-1);
+        }
+    }
+    else
+    {
+        ft_putstr_fd("Error\nNo or more than enough floor colors values\n", 1);
+        exit(-1);
+    }
     g_c++;
 }
 

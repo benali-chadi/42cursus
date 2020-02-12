@@ -23,14 +23,14 @@ void    resolution(char *line)
 	j = 0;
 	while(*line)
 	{
-		if (ft_isdigit(*line) && *line && j < 2)
+		if (ft_isdigit(*line) && *line)
 		{
 			if (j == 0)
-				g_r[j] = (ft_atoi(line) > 2550) ? 2550 : ft_atoi(line);
-			else
-				g_r[j] = (ft_atoi(line) > 1450) ? 1450 : ft_atoi(line);
+				g_r[j] = (ft_atoi(line) > 2560) ? 2560 : ft_atoi(line);
+			else if (j == 1)
+				g_r[j] = (ft_atoi(line) > 1440) ? 1440 : ft_atoi(line);
 
-			line += num(g_r[j]);
+			line += num(ft_atoi(line));
 			j++;
 		}
 		if(*line)
@@ -38,7 +38,7 @@ void    resolution(char *line)
 	}
 	if (j != 2)
 	{
-		ft_putstr_fd("Eroor\nNo enough resolution data\n", 1);
+		ft_putstr_fd("Eroor\nNo or more than enough resolution data\n", 1);
 		exit(-1);
 	}
 	g_c++;
@@ -85,7 +85,9 @@ void    check_map()
 {
 	int i;
 	int j;
+	int check;
 
+	check = 0;
 	i = -1;
 	while (++i < g_info.map_y)
 	{
@@ -102,7 +104,26 @@ void    check_map()
 				ft_putstr_fd("Error\nThe map must be surrounded by walls\n", 1);
 				exit(-1);
 			}
+			if (ft_isalpha(g_map[i][j]))
+			{
+				if (g_map[i][j] != 'N' && g_map[i][j] != 'S' && g_map[i][j] != 'W' && g_map[i][j] != 'E')
+				{
+					ft_putstr_fd("Error\nInvalid player direction in map\n", 1);
+					exit (-1);
+				}
+				check++;
+				if (check > 1)
+				{
+					ft_putstr_fd("Error\nMultiple player direction in map\n", 1);
+					exit (-1);
+				}
+			}
 		}
+	}
+	if (!check)
+	{
+		ft_putstr_fd("Error\nNo player direction in map\n", 1);
+		exit (-1);
 	}
 }
 
