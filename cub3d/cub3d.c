@@ -26,7 +26,6 @@ void    init_player(t_player *player, int i)
         player->direction = 0;
     else if (i == 'E')
         player->direction = 180;
-    // player->color = 0x48CFAF;
     g_info.count++;
 }
 
@@ -59,30 +58,18 @@ int     main(int ac, char **av)
 
     g_sprite = 0;
     if (ac < 2)
-    {
-        ft_putstr_fd("Eroor\nNot enough arguments\n", 1);
-        exit(-1);
-    }
+        ft_exit("Eroor\nNot enough arguments\n");
     fd = open(av[1], O_RDONLY);
     if (fd < 0 || !check_name(av[1]))
-    {
-        ft_putstr_fd("Error\nFile name is invalid\n", 1);
-        exit(-1);
-    }
+        ft_exit("Error\nFile name is invalid\n");
     if (!(setup(fd)))
-    {
-        ft_putstr_fd("Eroor\nAllocation error\n", 1);
-        exit(-1);
-    }
+        ft_exit("Eroor\nAllocation error\n");
     if(av[2])
     {
         if (!(ft_strncmp(av[2], "--save", 15)))
             g_info.save = 1;
         else
-        {
-            ft_putstr_fd("Error\nSecond argument name not accurate\n", 1);
-            exit(-1);
-        }
+            ft_exit("Error\nSecond argument name not accurate\n");
     }
     update(&player);
 	mlx_loop(g_info.mlx_ptr);

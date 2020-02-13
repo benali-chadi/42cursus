@@ -1,11 +1,11 @@
-R 123559 123669
+R 1200 500
 NO textures/mossy.xpm
 SO textures/colorstone.xpm
 WE textures/eagle.xpm
-EA textures/44.gif
+EA textures/redbrick.xpm
 
 S textures/barrel.xpm
-F 20, 120, 45
+F 20, 120, 50
 C 20, 20, 120
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1

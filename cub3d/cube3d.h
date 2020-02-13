@@ -216,6 +216,11 @@ void    give_col(t_col fc, char c);
 int     init_map(char *line);
 void    flr(char *line, t_col *f);
 void    ceiling(char *line, t_col *c);
+void    resolution(char *line);
+int		check_map_1(char *line);
+void    check_map_2();
+int     init_map(char *line);
+void	check_ply_pos(int m_v, int *check);
 
 /*
 **Casting and rendering
@@ -237,5 +242,6 @@ float   normalize_angle(float angle);
 int     normalize_angle_deg(int angle);
 int     num(int n);
 void    init_player(t_player *player, int i);
+void    ft_exit(char *str);
 
 #endif

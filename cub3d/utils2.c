@@ -42,11 +42,6 @@ int     has_wall_ray(float y, float x)
     return (1);
 }
 
-float   dist_p(float x1, float y1, float x2, float y2)
-{
-    return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
-}
-
 float   normalize_angle(float angle)
 {
     angle = remainder(angle, TWO_PI);
