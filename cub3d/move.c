@@ -69,29 +69,21 @@ void	render(t_player *player)
 int		move(t_player *player)
 {
 	if (player->walk_direction == 1)
-		if (!has_wall((player->y_p + INCREMENT_Y_UD * 10), (player->x_p + INCREMENT_X_UD * 10)))
-		{
-			player->y_p += INCREMENT_Y_UD;
-			player->x_p += INCREMENT_X_UD; 
-		}
+		if (!has_wall((player->y_p + INC_Y_UD * 10),
+		(player->x_p + INC_X_UD * 10)))
+			add_to_pl(&player->x_p, &player->y_p, INC_X_UD, INC_Y_UD);
 	if (player->walk_direction == -1)
-		if (!has_wall((player->y_p - INCREMENT_Y_UD * 10), (player->x_p - INCREMENT_X_UD * 10)))
-		{
-			player->y_p -= INCREMENT_Y_UD;
-			player->x_p -= INCREMENT_X_UD; 
-		}
+		if (!has_wall((player->y_p - INC_Y_UD * 10),
+		(player->x_p - INC_X_UD * 10)))
+			sub_frm_pl(&player->x_p, &player->y_p, INC_X_UD, INC_Y_UD);
 	if (player->walk_direction == 2)
-		if (!has_wall((player->y_p + INCREMENT_Y_LR * 10), (player->x_p + INCREMENT_X_LR * 10)))
-		{
-			player->y_p += INCREMENT_Y_LR;
-			player->x_p += INCREMENT_X_LR;
-		}
+		if (!has_wall((player->y_p + INC_Y_LR * 10),
+		(player->x_p + INC_X_LR * 10)))
+			add_to_pl(&player->x_p, &player->y_p, INC_X_LR, INC_Y_LR);
 	if (player->walk_direction == -2)
-		if (!has_wall((player->y_p - INCREMENT_Y_LR * 10), (player->x_p - INCREMENT_X_LR * 10)))
-		{
-			player->y_p -= INCREMENT_Y_LR;
-			player->x_p -= INCREMENT_X_LR;
-		}
+		if (!has_wall((player->y_p - INC_Y_LR * 10),
+		(player->x_p - INC_X_LR * 10)))
+			sub_frm_pl(&player->x_p, &player->y_p, INC_X_LR, INC_Y_LR);
 	player->direction += player->turn_direction;
 	render(player);
 	return (0);

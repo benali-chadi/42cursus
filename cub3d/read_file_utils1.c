@@ -6,7 +6,7 @@
 /*   By: cbenali- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 16:42:06 by cbenali-          #+#    #+#             */
-/*   Updated: 2020/02/13 01:56:50 by cbenali-         ###   ########.fr       */
+/*   Updated: 2020/02/14 23:50:32 by cbenali-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ extern int g_r[2];
 
 void	flr(char *line, t_col *f)
 {
-	char    **s;
-	int     i;
+	char	**s;
+	int		i;
 
 	i = 0;
 	while (!ft_isdigit(line[i]))
@@ -28,7 +28,7 @@ void	flr(char *line, t_col *f)
 	if (s[0] && s[1] && s[2] && !s[3])
 	{
 		if (ft_atoi(s[0]) >= 0 && ft_atoi(s[0]) < 256 && ft_atoi(s[1]) >= 0 &&
-				ft_atoi(s[1]) < 256 && ft_atoi(s[2]) >= 0 && ft_atoi(s[2]) < 256)
+			ft_atoi(s[1]) < 256 && ft_atoi(s[2]) >= 0 && ft_atoi(s[2]) < 256)
 		{
 			f->r = ft_atoi(s[0]);
 			f->g = ft_atoi(s[1]);
@@ -42,10 +42,10 @@ void	flr(char *line, t_col *f)
 	g_c++;
 }
 
-void    ceiling(char *line, t_col *c)
+void	ceiling(char *line, t_col *c)
 {
-	char    **s;
-	int     i;
+	char	**s;
+	int		i;
 
 	i = 0;
 	while (!ft_isdigit(line[i]))
@@ -55,7 +55,7 @@ void    ceiling(char *line, t_col *c)
 	if (s[0] && s[1] && s[2] && !s[3])
 	{
 		if (ft_atoi(s[0]) >= 0 && ft_atoi(s[0]) < 256 && ft_atoi(s[1]) >= 0 &&
-				ft_atoi(s[1]) < 256 && ft_atoi(s[2]) >= 0 && ft_atoi(s[2]) < 256)
+			ft_atoi(s[1]) < 256 && ft_atoi(s[2]) >= 0 && ft_atoi(s[2]) < 256)
 		{
 			c->r = ft_atoi(s[0]);
 			c->g = ft_atoi(s[1]);
@@ -69,7 +69,7 @@ void    ceiling(char *line, t_col *c)
 	g_c++;
 }
 
-int     check_name(char *str)
+int		check_name(char *str)
 {
 	char **split;
 
@@ -81,7 +81,7 @@ int     check_name(char *str)
 	return (1);
 }
 
-void    give_col(t_col fc, char c)
+void	give_col(t_col fc, char c)
 {
 	if (c == 'f')
 	{
@@ -97,12 +97,12 @@ void    give_col(t_col fc, char c)
 	}
 }
 
-void    resolution(char *line)
+void	resolution(char *line)
 {
 	int j;
 
 	j = 0;
-	while(*line)
+	while (*line)
 	{
 		if (ft_isdigit(*line) && *line)
 		{
@@ -113,7 +113,7 @@ void    resolution(char *line)
 			line += num(ft_atoi(line));
 			j++;
 		}
-		if(*line)
+		if (*line)
 			line++;
 	}
 	if (j != 2)

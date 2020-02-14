@@ -33,10 +33,10 @@
 # define WALL_WIDTH 1
 # define TILE_SIZE 64
 
-# define INCREMENT_Y_UD (sin(player->direction * VAL) * 6.8)
-# define INCREMENT_X_UD (cos(player->direction * VAL) * 6.8)
-# define INCREMENT_Y_LR (sin((player->direction + 90 ) * VAL) * 6.8)
-# define INCREMENT_X_LR (cos((player->direction + 90 ) * VAL) * 6.8)
+# define INC_Y_UD (sin(player->direction * VAL) * 6.8)
+# define INC_X_UD (cos(player->direction * VAL) * 6.8)
+# define INC_Y_LR (sin((player->direction + 90 ) * VAL) * 6.8)
+# define INC_X_LR (cos((player->direction + 90 ) * VAL) * 6.8)
 
 /*
 	** Player struct
@@ -66,18 +66,16 @@ typedef struct	s_ray {
 	int			is_ray_facing_down;
 	int			is_ray_facing_left;
 	int			is_ray_facing_right;
-	int			wall_hit_content;
 }				t_rays;
 
 typedef struct	s_ray_hit {
-	float		x_intercept;
-	float		y_intercept;
+	float		x_inte;
+	float		y_inte;
 	float		x_step;
 	float		y_step;
-	float		wall_hit_x;
-	float		wall_hit_y;
+	float		hit_x;
+	float		hit_y;
 	int			found_hit;
-	int			wall_content;
 	int			to_check;
 }				t_ray_hit;
 
@@ -222,9 +220,11 @@ void			check_ply_pos(int m_v, int *check);
 */
 
 void			cast_all_rays(t_player player);
+int				has_wall_ray(float y, float x);
 float			dist_p(float x1, float y1, float x2, float y2);
 void			render_3d(float direction, t_player player);
-int				has_wall_ray(float y, float x);
+void			check_wall_dir(float wall_height, int i);
+void			draw_wall(int x, float wall_height, int i);
 void			update_spr_dis(t_player player);
 void			ft_sprite(t_player player, int i);
 
@@ -239,5 +239,7 @@ int				num(int n);
 void			init_player(t_player *player, int i);
 void			ft_exit(char *str);
 void			bmp_save(void);
+void			add_to_pl(float *x_p, float *y_p, float x_inc, float y_inc);
+void			sub_frm_pl(float *x_p, float *y_p, float x_inc, float y_inc);
 
 #endif
