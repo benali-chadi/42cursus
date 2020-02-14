@@ -19,16 +19,11 @@ void horz_inter(t_ray_hit *horz, t_player player, int stripid, float ray_angle)
 
     horz->y_intercept = floor(player.y_p / TILE_SIZE) * TILE_SIZE;
     horz->y_intercept += g_rays[stripid].is_ray_facing_down ? TILE_SIZE : 0;
-
     horz->to_check = g_rays[stripid].is_ray_facing_up ? -1 : 0;
-    
     horz->x_intercept = player.x_p - (player.y_p - horz->y_intercept) / tan(ray_angle);
-
     horz->y_step = TILE_SIZE;
     horz->y_step *= g_rays[stripid].is_ray_facing_up ? -1 : 1;
-
     horz->x_step = horz->y_step / tan(ray_angle);
-
     next_touch_x = horz->x_intercept;
     next_touch_y = horz->y_intercept;
     while (next_touch_x >= 0 && next_touch_x < g_info.win_x && next_touch_y >= 0 && next_touch_y < g_info.win_y)
@@ -56,16 +51,11 @@ void vert_inter(t_ray_hit *vert, t_player player, int stripid, float ray_angle)
 
     vert->x_intercept = floor(player.x_p / TILE_SIZE) * TILE_SIZE;
     vert->x_intercept += g_rays[stripid].is_ray_facing_right ? TILE_SIZE : 0;
-
     vert->to_check = g_rays[stripid].is_ray_facing_left ? -1 : 0;
-    
     vert->y_intercept = player.y_p - (player.x_p - vert->x_intercept) * tan(ray_angle);
-
     vert->x_step = TILE_SIZE;
     vert->x_step *= g_rays[stripid].is_ray_facing_left ? -1 : 1;
-
     vert->y_step = vert->x_step * tan(ray_angle);
-
     next_touch_x = vert->x_intercept;
     next_touch_y = vert->y_intercept;
     while (next_touch_x >= 0 && next_touch_x < g_info.win_x && next_touch_y >= 0 && next_touch_y < g_info.win_y)

@@ -10,7 +10,7 @@ NAME = CUBE3D.a
 
 EXEC = run
 
-SRC = cast.c cub3d.c draw.c move.c read_file.c render_3d.c render_spt.c utils2.c utils3.c read_file_utils1.c read_file_map.c
+SRC = cast.c cub3d.c draw.c move.c read_file.c render_3d.c render_spt.c utils2.c utils3.c read_file_utils1.c read_file_map.c bmp_save.c
 
 O = $(SRC:.c=.o)
 
