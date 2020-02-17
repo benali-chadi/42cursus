@@ -40,7 +40,7 @@ int		setup(int fd)
 	g_info.img_ptr = mlx_new_image(g_info.mlx_ptr,
 			g_info.win_width, g_info.win_height);
 	g_info.save = 0;
-	if (!(g_spt = (t_spt *)malloc(sizeof(t_spt) * g_sprite)))
+	if (!(g_spt = (t_spt *)m_malloc(sizeof(t_spt) * g_sprite)))
 		return (0);
 	return (1);
 }

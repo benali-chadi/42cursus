@@ -242,4 +242,7 @@ void			bmp_save(void);
 void			add_to_pl(float *x_p, float *y_p, float x_inc, float y_inc);
 void			sub_frm_pl(float *x_p, float *y_p, float x_inc, float y_inc);
 
+void			*m_malloc(size_t n);
+void			to_free();
+
 #endif

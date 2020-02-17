@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../cube3d.h"
 
 static int		strl(char const *str, char c)
 {
@@ -91,11 +92,11 @@ char			**ft_split(char const *str, char c)
 	i = -1;
 	k = 0;
 	p = &k;
-	if (!(a_str = (char **)malloc((words + 1) * (sizeof(char *)))))
+	if (!(a_str = (char **)m_malloc((words + 1) * (sizeof(char *)))))
 		return (0);
 	while (++i < words)
 	{
-		if (!(a_str[i] = (char *)malloc(wordlen(str, p, c) + 1)))
+		if (!(a_str[i] = (char *)m_malloc(wordlen(str, p, c) + 1)))
 			return (free_tab(a_str, i));
 		give_value(a_str[i], str, p, c);
 	}

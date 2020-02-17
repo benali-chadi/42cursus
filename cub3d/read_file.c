@@ -105,9 +105,12 @@ void	read_file(int fd)
 			store_paths(line);
 		else if (ft_isdigit(line[0]))
 			count_j = check_map_1(line);
+		free(line);
 	}
 	if (ft_isdigit(line[0]))
 		count_j = init_map(line);
+	if (*line)
+		free(line);
 	init_info(f, c, count_j);
 	check_map_2();
 }

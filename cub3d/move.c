@@ -15,6 +15,7 @@
 int		key_destroy(int key, void *ptr)
 {
 	key = (int)ptr;
+	to_free();
 	mlx_destroy_window(g_info.mlx_ptr, g_info.win_ptr);
 	exit(0);
 }

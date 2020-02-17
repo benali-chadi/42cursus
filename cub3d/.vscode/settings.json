@@ -5,6 +5,7 @@
         "bitset": "c",
         "chrono": "c",
         "unordered_map": "c",
-        "hashtable": "c"
+        "hashtable": "c",
+        "libft.h": "c"
     }
 }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "../cube3d.h"
 
 static int	find_last(int i, char const *s1, char const *set)
 {
@@ -68,7 +69,7 @@ char		*ft_strtrim(char const *s1, char const *set)
 		len = 0;
 	else
 		len = end - start;
-	if (!(res = (char *)malloc(len + 1)))
+	if (!(res = (char *)m_malloc(len + 1)))
 		return (0);
 	res = ft_substr(s1, start, len);
 	return (res);

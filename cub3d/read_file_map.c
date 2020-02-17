@@ -29,8 +29,8 @@ int		check_map_1(char *line)
 
 void	check_ply_pos(int m_v, int *check)
 {
-	if (m_v != 'N' && m_v != 'S' && m_v != 'W' && m_v != 'E')
-		ft_exit("Error\nInvalid player direction in map\n");
+	if (m_v != 'N' && m_v != 'S' && m_v != 'W' && m_v != 'E' && m_v > 2)
+		ft_exit("Error\nInvalid symbol in map\n");
 	(*check)++;
 	if (*check > 1)
 		ft_exit("Error\nMultiple player direction in map\n");
@@ -52,7 +52,7 @@ void	check_map_2(void)
 			if (((i == 0 || i == g_info.map_y - 1) && g_map[i][j] != 1) ||
 					((j == 0 || j == g_info.map_x - 1) && g_map[i][j] != 1))
 				ft_exit("Error\nThe map must be surrounded by walls\n");
-			if (ft_isalpha(g_map[i][j]))
+			if (ft_isalpha(g_map[i][j]) || g_map[i][j] > 2)
 				check_ply_pos(g_map[i][j], &check);
 		}
 	}
