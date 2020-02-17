@@ -6,7 +6,7 @@ typedef struct	s_alloc
 }				t_alloc;
 
 
-t_alloc		g_alloc[2000];
+t_alloc		g_alloc[400];
 int		g_all = 0;
 
 void	*m_malloc(size_t n)

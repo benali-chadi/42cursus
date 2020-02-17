@@ -39,7 +39,6 @@ int		setup(int fd)
 			g_info.win_height, "mlx 1337");
 	g_info.img_ptr = mlx_new_image(g_info.mlx_ptr,
 			g_info.win_width, g_info.win_height);
-	g_info.save = 0;
 	if (!(g_spt = (t_spt *)m_malloc(sizeof(t_spt) * g_sprite)))
 		return (0);
 	return (1);
@@ -58,14 +57,13 @@ int		main(int ac, char **av)
 	t_player	player;
 	int			fd;
 
+	g_info.save = 0;
 	g_sprite = 0;
-	if (ac < 2)
-		ft_exit("Eroor\nNot enough arguments\n");
+	if (ac < 2 || ac > 3)
+		ft_exit("Eroor\nNot or more than enough arguments\n");
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0 || !check_name(av[1]))
 		ft_exit("Error\nFile name is invalid\n");
-	if (!(setup(fd)))
-		ft_exit("Eroor\nAllocation error\n");
 	if (av[2])
 	{
 		if (!(ft_strncmp(av[2], "--save", 15)))
@@ -73,6 +71,8 @@ int		main(int ac, char **av)
 		else
 			ft_exit("Error\nSecond argument name not accurate\n");
 	}
+	if (!(setup(fd)))
+		ft_exit("Eroor\nAllocation error\n");
 	update(&player);
 	mlx_loop(g_info.mlx_ptr);
 	return (0);
