@@ -73,11 +73,11 @@ void	store_paths(char *line)
 
 void	check_fl(char *line, int *j, t_col *f, t_col *c)
 {
-	if (line[0] == 'R')
+	if (line[0] == 'R' && (line[1] == ' ' || line[1] == '\t'))
 		resolution(line);
-	else if (line[0] == 'F')
+	else if (line[0] == 'F' && (line[1] == ' ' || line[1] == '\t'))
 		flr(line, f);
-	else if (line[0] == 'C')
+	else if (line[0] == 'C' && (line[1] == ' ' || line[1] == '\t'))
 		ceiling(line, c);
 	else if (line[0] == 'N' || line[0] == 'S' || line[0] == 'W'
 			|| line[0] == 'E')

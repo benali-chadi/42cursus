@@ -257,4 +257,6 @@ void			sub_frm_pl(float *x_p, float *y_p, float x_inc, float y_inc);
 void			*m_malloc(size_t n);
 void			to_free(void);
 
+int				all_n(char *s);
+
 #endif

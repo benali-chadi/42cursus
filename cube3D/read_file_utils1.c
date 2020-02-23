@@ -25,7 +25,7 @@ void	flr(char *line, t_col *f)
 		i++;
 	line = ft_strtrim(line + i, " /t");
 	s = ft_split(line, ',');
-	if (s[0] && s[1] && s[2] && !s[3])
+	if (all_n(s[0]) && all_n(s[1]) && all_n(s[2]) && !s[3])
 	{
 		if (ft_atoi(s[0]) >= 0 && ft_atoi(s[0]) < 256 && ft_atoi(s[1]) >= 0 &&
 			ft_atoi(s[1]) < 256 && ft_atoi(s[2]) >= 0 && ft_atoi(s[2]) < 256)
@@ -38,7 +38,7 @@ void	flr(char *line, t_col *f)
 			ft_exit("Error\nInvalid floor colors values\n");
 	}
 	else
-		ft_exit("Error\nNo or more than enough floor colors values\n");
+		ft_exit("Error\nInvalid floor colors values\n");
 	g_c++;
 }
 
@@ -52,7 +52,7 @@ void	ceiling(char *line, t_col *c)
 		i++;
 	line = ft_strtrim(line + i, " /t");
 	s = ft_split(line, ',');
-	if (s[0] && s[1] && s[2] && !s[3])
+	if (all_n(s[0]) && all_n(s[1]) && all_n(s[2]) && !s[3])
 	{
 		if (ft_atoi(s[0]) >= 0 && ft_atoi(s[0]) < 256 && ft_atoi(s[1]) >= 0 &&
 			ft_atoi(s[1]) < 256 && ft_atoi(s[2]) >= 0 && ft_atoi(s[2]) < 256)
@@ -65,7 +65,7 @@ void	ceiling(char *line, t_col *c)
 			ft_exit("Error\nInvalid ceiling colors values\n");
 	}
 	else
-		ft_exit("Error\nNo or more than enough ceiling colors values\n");
+		ft_exit("Error\nInvalid ceiling colors values\n");
 	g_c++;
 }
 
