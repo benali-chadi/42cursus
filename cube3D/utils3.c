@@ -55,9 +55,10 @@ int		all_n(char *s)
 	i = -1;
 	if (!s)
 		return (0);
+	s = ft_strtrim(s, " \t");
 	while (s[++i])
 	{
-		if ((s[i] < 48 || s[i] > 57) && s[i] != 32)
+		if (s[i] < 48 || s[i] > 57)
 			return (0);
 	}
 	return (1);
