@@ -42,7 +42,7 @@ void	flr(char *line, t_col *f)
 void	ceiling(char *line, t_col *c)
 {
 	char	**s;
-	
+
 	line = ft_strtrim(line + 1, " /t");
 	check_comma(line);
 	s = ft_split(line, ',');
