@@ -18,12 +18,9 @@ extern int g_r[2];
 void	flr(char *line, t_col *f)
 {
 	char	**s;
-	int		i;
 
-	i = 0;
-	while (!ft_isdigit(line[i]))
-		i++;
-	line = ft_strtrim(line + i, " /t");
+	line = ft_strtrim(line + 1, " /t");
+	check_comma(line);
 	s = ft_split(line, ',');
 	if (all_n(s[0]) && all_n(s[1]) && all_n(s[2]) && !s[3])
 	{
@@ -45,12 +42,9 @@ void	flr(char *line, t_col *f)
 void	ceiling(char *line, t_col *c)
 {
 	char	**s;
-	int		i;
-
-	i = 0;
-	while (!ft_isdigit(line[i]))
-		i++;
-	line = ft_strtrim(line + i, " /t");
+	
+	line = ft_strtrim(line + 1, " /t");
+	check_comma(line);
 	s = ft_split(line, ',');
 	if (all_n(s[0]) && all_n(s[1]) && all_n(s[2]) && !s[3])
 	{

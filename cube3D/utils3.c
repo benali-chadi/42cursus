@@ -47,19 +47,3 @@ void	check_wall_dir(float wall_height, int i)
 	else if (g_rays[i].is_ray_facing_right && g_rays[i].is_vertical)
 		draw_wall(i * WALL_WIDTH, wall_height, 3);
 }
-
-int		all_n(char *s)
-{
-	int i;
-
-	i = -1;
-	if (!s)
-		return (0);
-	s = ft_strtrim(s, " \t");
-	while (s[++i])
-	{
-		if (s[i] < 48 || s[i] > 57)
-			return (0);
-	}
-	return (1);
-}

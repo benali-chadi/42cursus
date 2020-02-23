@@ -258,5 +258,6 @@ void			*m_malloc(size_t n);
 void			to_free(void);
 
 int				all_n(char *s);
+void			check_comma(char *line);
 
 #endif
