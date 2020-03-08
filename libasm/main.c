@@ -1,33 +1,24 @@
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <fcntl.h>
-// #include <unistd.h>
-// // #include <string.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbenali- <cbenali-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/08 23:44:24 by cbenali-          #+#    #+#             */
+/*   Updated: 2020/03/08 23:49:38 by cbenali-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// void		hello();
-// size_t	ft_write(int fd, const void *buf, size_t nbyte);
-// size_t	ft_read(int fd, void *buf, size_t nbytes);
-// size_t	ft_strlen(char *s);
-// char		*ft_strcpy(char *dst, char *src);
-// int		ft_strcmp(const char *s1, const char *s2);
-// char	*ft_strdup(const char *s1);
-// int     main()
-// {
-// 	char *s;
-// 	s = ft_strdup("CchadiI");
-// 	printf("%s\n", s);
-// 	// hello();
-// }
 #include "libasm.h"
 
 int		strlen_test(char *str)
 {
-	int 	ret1;
-	int 	ret2;
+	int		ret1;
+	int		ret2;
 
 	ret1 = ft_strlen(str);
 	ret2 = strlen(str);
-	//printf("strlen : %d / ft_strlen : %d\n", ret1, ret2);
 	if (ret1 == ret2)
 		printf("" GREEN "[OK] " RESET "");
 	else
@@ -53,14 +44,13 @@ int		strcpy_test(char *src)
 
 int		strcmp_test(char *s1, char *s2)
 {
-	int 	ret1;
-	int 	ret2;
+	int		ret1;
+	int		ret2;
 
 	ret1 = strcmp(s1, s2);
 	ret2 = ft_strcmp(s1, s2);
-	// printf("\n%s\n%s\n", s1, s2);
-	// printf("strcmp : %d / ft_strcmp : %d\n", ret1, ret2);
-	if ((ret1 > 0 && ret2 > 0) || (ret1 < 0 && ret2 < 0) || (ret1 == 0 && ret2 == 0))
+	if ((ret1 > 0 && ret2 > 0) || (ret1 < 0 && ret2 < 0)
+	|| (ret1 == 0 && ret2 == 0))
 		printf("" GREEN "[OK] " RESET "");
 	else
 		printf("" RED "[KO] " RESET "");
@@ -72,7 +62,7 @@ int		write_test(char *str)
 	int		ft_write_pipe[2];
 	char	buf[BUFFER_SIZE];
 	int		ret;
-// 
+
 	bzero(buf, BUFFER_SIZE);
 	if (pipe(ft_write_pipe) < 0)
 		exit(EXIT_FAILURE);
@@ -80,7 +70,6 @@ int		write_test(char *str)
 	write(ft_write_pipe[1], str, strlen(str));
 	ret = read(ft_write_pipe[0], buf, BUFFER_SIZE);
 	buf[ret] = '\0';
-// 
 	if (!strcmp(buf, str))
 		printf("" GREEN "[OK] " RESET "");
 	else
@@ -103,7 +92,6 @@ int		read_test(char *str)
 	write(ft_read_pipe[1], str, strlen(str));
 	ret = ft_read(ft_read_pipe[0], buf, BUFFER_SIZE);
 	buf[ret] = '\0';
-
 	if (!strcmp(buf, str))
 		printf("" GREEN "[OK] " RESET "");
 	else

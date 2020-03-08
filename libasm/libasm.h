@@ -1,8 +1,22 @@
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libasm.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cbenali- <cbenali-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/08 23:31:20 by cbenali-          #+#    #+#             */
+/*   Updated: 2020/03/08 23:47:52 by cbenali-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBASM_H
+# define LIBASM_H
+# include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
 # define RESET   "\033[0m"
 # define RED     "\033[31m"
@@ -15,3 +29,5 @@ char		*ft_strcpy(char *dst, const char *src);
 size_t		ft_strlen(const char *s);
 ssize_t		ft_write(int fildes, const void *buf, size_t nbyte);
 char		*ft_strdup(const char *s1);
+
+#endif
