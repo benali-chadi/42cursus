@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbenali- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cbenali- <cbenali-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 16:40:42 by cbenali-          #+#    #+#             */
-/*   Updated: 2020/02/14 23:32:48 by cbenali-         ###   ########.fr       */
+/*   Updated: 2020/03/01 20:20:31 by cbenali-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		key_destroy(int key, void *ptr)
 	to_free();
 	mlx_destroy_window(g_info.mlx_ptr, g_info.win_ptr);
 	exit(0);
+	return(0);
 }
 
 int		key_press(int key, t_player *player)

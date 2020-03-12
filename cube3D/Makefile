@@ -6,7 +6,7 @@ FRAMEWORKS = -framework OpenGl -framework Appkit
 
 NAMELIB = libft.a
 
-NAME = CUBE3D
+NAME = cub3D
 
 EXEC = cub3D
 
@@ -25,7 +25,7 @@ $(NAMELIB) :
 	cp libft/$(NAMELIB) .
 
 $(NAME) : $(NAMELIB)
-	gcc $(FLAGS) $(SRC) -g3 -I /usr/local/include libft.a gnl/get_next_line.c gnl/get_next_line_utils.c -L /usr/local/lib -lmlx -framework OpenGl -framework Appkit -Ofast -D BUFFER_SIZE=20 -o $(EXEC)
+	gcc $(FLAGS) $(SRC) -g3 -I /usr/local/include libft.a gnl/get_next_line.c gnl/get_next_line_utils.c -L /usr/local/lib -lmlx -framework OpenGl -framework Appkit -Ofast -D BUFFER_SIZE=20 -D L_C=F -o $(EXEC)
 
 clean :
 	make clean -C libft/

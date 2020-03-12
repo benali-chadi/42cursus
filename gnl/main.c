@@ -11,7 +11,7 @@ int main(int ac, char **av)
 	char *line;
 	int fd;
 
-	fd = open(av[1], O_RDONLY);
+	fd = open("main.c", O_RDONLY);
 	if (fd > 0)
 		while(get_next_line(fd, &line))
 		{
