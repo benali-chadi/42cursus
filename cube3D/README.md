@@ -1,26 +1,3 @@
-# leak_check_xmalloc
+# cube3D
 
-An alternative to valgrind.
-
-Include "malloc.h" after every <stdlib.h> in your code.
-
-Include "malloc.h" in your main too.
-
-Add a line leakcheck(); or leakcheckfull(); before your main's return.
-
-It should be something like this:
-
-	#include "malloc.h"
-
-	int		main()
-	{
-		/* your code */
-		leakcheck(); //or leakcheckfull();
-		return (0);
-	}
-
-If you're also using exit() in your code, compile everything with the following define:
-
-	gcc ... -D L_C=N //for leakcheck();
-	
-	gcc ... -D L_C=F //for leakcheckfull();
+This project is inspired by the world-famous eponymous 90's game, which was the first FPS ever. It enabled me to explore ray-casting technique. The goal was to make a dynamic view inside a maze, in which we have to find our way.
